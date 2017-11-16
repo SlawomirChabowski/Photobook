@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css?family=Lemon');
+
+#left_column {
+    min-height: 100vh;
+}
+
+#left_column, #main_container {
+    padding: 15px;
+}
+
+header h1 {
+    font-family: 'Lemon', cursive;
+    font-size: 36px;
+    text-align: center;
+}
+
+footer {
+    position: absolute;
+    font-size: 11px;
+    bottom: 15px;
+}
+
+#login_box {
+    display: block;
+    margin: 0 auto;
+    border-radius: 3px;
+    background-color: rgba(255, 255, 255, 0.3);
+    padding: 15px;
+    text-align: center;
+}
+
+#left_bar_navigation {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}

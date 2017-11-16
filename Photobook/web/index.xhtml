@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <body>
+
+        <ui:composition template="./templates/mainTemplate.xhtml">
+
+            <ui:define name="left">
+                
+                <div id="login_box">
+                    You are not logged in.
+                    <div class="btn-group" role="group">
+                        <button class="btn btn-lg btn-light">Login</button>
+                        <button class="btn btn-lg btn-primary">Register</button>
+                    </div>
+                </div>
+                
+                <hr />
+                
+                <nav>
+                    <ul id="left_bar_navigation">
+                        <li>Link placeholder</li>
+                        <li>Link placeholder</li>
+                        <li>Link placeholder</li>
+                        <li>Link placeholder</li>
+                        <li>Link placeholder</li>
+                        <li>Link placeholder</li>
+                        <li>Link placeholder</li>
+                        <li>Link placeholder</li>
+                        <li>Link placeholder</li>
+                        <li>Link placeholder</li>
+                        <li>Link placeholder</li>
+                    </ul>
+                </nav>
+                
+            </ui:define>
+
+            <ui:define name="content">
+                <div class="jumbotron">
+                    <h2 class="display-3">Welcome to Photobook!</h2>
+                    <p>
+                        Photobook is a place where you can share the photos, paintings, graphics etc. that you made
+                        to the world! Just register and express yourself! It's free so you have nothing to lose!
+                    </p>
+                </div>
+                
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
