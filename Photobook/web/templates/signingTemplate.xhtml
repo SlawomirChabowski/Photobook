@@ -12,7 +12,7 @@
               crossorigin="anonymous" />
         
         <!-- Custom CSS -->
-        <h:outputStylesheet name="/css/mainLayout.css" />
+        <h:outputStylesheet name="/css/signingLayout.css" />
         
         <!-- Mobile devices integration -->
         <meta name="viewport"
@@ -24,27 +24,13 @@
     </h:head>
 
     <h:body>
-        <div class="container-fluid">
-            <div class="row">
-                
-                <div id="left_column" class="col-2 bg-info text-light">
-                    <header>
-                        <h1>Photobook</h1>
-                    </header>
-                    
-                    <ui:insert name="left"></ui:insert>
-                    
-                    <footer>
-                       Authors: Wojciech Byczyński, Sławomir Chabowski
-                    </footer>
-                </div>
-                
-                <div id="main_container" class="col-8">
-                    <ui:insert name="content"></ui:insert>
-                </div>
-                
-            </div>
-        </div>
+        <table id="block_main">
+            <tbody>
+              <tr>
+                <td class="align-middle">We will put login/sign up box right there</td>
+              </tr>
+            </tbody>
+          </table>
     </h:body>
 
 </html>
