@@ -1,14 +1,27 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
     <body>
 
         <ui:composition template="./templates/signingTemplate.xhtml">
 
             <ui:define name="form">
-                form
+                <h:form>
+                    <div id="block_center">
+                        <h1 class="text-info title">Photobook</h1>
+                        <hr />
+                        <h2>Zaloguj się</h2>
+                        
+                        <h:inputText class="login_input" value="#{login.userName}" a:placeholder="Nazwa użytkownika" />
+                        <h:inputSecret class="login_input" value="#{login.userPassword}" a:placeholder="Hasło" />
+
+                        <h:commandButton class="btn btn-lg btn-danger login_input" value="Zaloguj"/>
+                    </div>
+                </h:form>
             </ui:define>
 
         </ui:composition>

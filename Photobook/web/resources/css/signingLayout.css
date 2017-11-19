@@ -1,4 +1,37 @@
+@import url('https://fonts.googleapis.com/css?family=Lemon');
+
+body {
+    background-color: #f9f9f9;
+}
+
 #block_main {
     height: 100vh;
     margin: 0 auto;
+}
+
+#block_center {
+    background-color: #ffffff;
+    max-width: 500px;
+    padding: 30px;
+    border-top: 3px solid #DC3545;
+    border-bottom: 3px solid #17A2b8;
+    border-radius: 3px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+#block_center input {
+    margin-top: 10px;
+}
+
+.login_input {
+    width: 100%;
+    min-height: 40px;
+    font-size: 18px;
+    padding: 0px 5px;
+}
+
+.title {
+    font-family: 'Lemon', cursive;
+    font-size: 50px;
+    text-align: center;
 }
