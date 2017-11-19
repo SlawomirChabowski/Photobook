@@ -12,14 +12,20 @@
             <ui:define name="form">
                 <h:form>
                     <div id="block_center">
-                        <h1 class="text-info title">Photobook</h1>
+                        <h:link class="title_link" outcome="index">
+                            <h1 class="text-info title">Photobook</h1>
+                        </h:link>
                         <hr />
-                        <h2>Zaloguj się</h2>
+                        <h2>Login</h2>
                         
-                        <h:inputText class="login_input" value="#{login.userName}" a:placeholder="Nazwa użytkownika" />
-                        <h:inputSecret class="login_input" value="#{login.userPassword}" a:placeholder="Hasło" />
+                        <h:inputText class="login_input" value="#{login.userName}" a:placeholder="Username" />
+                        <h:inputSecret class="login_input" value="#{login.userPassword}" a:placeholder="Password" />
 
-                        <h:commandButton class="btn btn-lg btn-danger login_input" value="Zaloguj"/>
+                        <h:commandButton class="btn btn-lg btn-danger login_button" value="Login"/>
+                        
+                        <h:link outcome="register">
+                            <p class="text-info register_link">Don't have account?</p>
+                        </h:link>
                     </div>
                 </h:form>
             </ui:define>

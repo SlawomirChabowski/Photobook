@@ -30,8 +30,22 @@ body {
     padding: 0px 5px;
 }
 
+.login_button {
+    width: 100%;
+}
+
 .title {
     font-family: 'Lemon', cursive;
     font-size: 50px;
     text-align: center;
+}
+
+.title_link, .title_link:visited, .title_link:hover, .title_link:active {
+    text-decoration: none;
+}
+
+.register_link {
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
