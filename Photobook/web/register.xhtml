@@ -1,14 +1,36 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
     <body>
 
         <ui:composition template="./templates/signingTemplate.xhtml">
 
             <ui:define name="form">
-                form
+                <h:form>
+                    <div id="block_center">
+                        <h:link class="title_link" outcome="index">
+                            <h1 class="text-info title">Photobook</h1>
+                        </h:link>
+                        <hr />
+                        <h2>Register</h2>
+                        
+                        <h:inputText class="full_size_input" value="#{register.userName}" a:placeholder="Username" />
+                        <h:inputText class="half_size_input input_name" value="#{register.name}" a:placeholder="Name*" />
+                        <h:inputText class="half_size_input input_surname" value="#{register.surname}" a:placeholder="Surname*" />
+                        <h:inputText class="full_size_input" value="#{register.email}" a:placeholder="Email address" />
+                        <h:inputSecret class="full_size_input" value="#{register.password}" a:placeholder="Password" />
+                        <h:inputSecret class="full_size_input" value="#{register.confirmation}" a:placeholder="Confirm password" />
+
+                        <h:commandButton class="btn btn-lg btn-success login_button" value="Create new account"/>
+                        
+                        <hr />
+                        <p class="text-info">Fields marked with asterisk are optional.</p>
+                    </div>
+                </h:form>
             </ui:define>
 
         </ui:composition>

@@ -23,11 +23,26 @@ body {
     margin-top: 10px;
 }
 
-.login_input {
+.full_size_input {
     width: 100%;
     min-height: 40px;
     font-size: 18px;
     padding: 0px 5px;
+}
+
+.half_size_input {
+    width: 49%;
+    min-height: 40px;
+    font-size: 18px;
+    padding: 0px 5px;
+}
+
+.input_name {
+    float: left;
+}
+
+.input_surname {
+    float: right;
 }
 
 .login_button {
