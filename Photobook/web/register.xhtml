@@ -16,19 +16,19 @@
                             <h1 class="text-info title">Photobook</h1>
                         </h:link>
                         <hr />
-                        <h2>Register</h2>
+                        <h2>#{msg.register_register}</h2>
                         
-                        <h:inputText class="full_size_input" value="#{register.userName}" a:placeholder="Username" />
-                        <h:inputText class="half_size_input input_name" value="#{register.name}" a:placeholder="Name*" />
-                        <h:inputText class="half_size_input input_surname" value="#{register.surname}" a:placeholder="Surname*" />
-                        <h:inputText class="full_size_input" value="#{register.email}" a:placeholder="Email address" />
-                        <h:inputSecret class="full_size_input" value="#{register.password}" a:placeholder="Password" />
-                        <h:inputSecret class="full_size_input" value="#{register.confirmation}" a:placeholder="Confirm password" />
+                        <h:inputText class="full_size_input" value="#{register.userName}" a:placeholder="#{msg.register_username}" />
+                        <h:inputText class="half_size_input input_name" value="#{register.name}" a:placeholder="#{msg.register_name}*" />
+                        <h:inputText class="half_size_input input_surname" value="#{register.surname}" a:placeholder="#{msg.register_surname}*" />
+                        <h:inputText class="full_size_input" value="#{register.email}" a:placeholder="#{msg.register_email}" />
+                        <h:inputSecret class="full_size_input" value="#{register.password}" a:placeholder="#{msg.register_password}" />
+                        <h:inputSecret class="full_size_input" value="#{register.confirmation}" a:placeholder="#{msg.register_confirm}" />
 
-                        <h:commandButton class="btn btn-lg btn-success login_button" value="Create new account"/>
+                        <h:commandButton class="btn btn-lg btn-success login_button" value="#{msg.register_create}"/>
                         
                         <hr />
-                        <p class="text-info">Fields marked with asterisk are optional.</p>
+                        <p class="text-info">#{msg.register_optional}</p>
                     </div>
                 </h:form>
             </ui:define>

@@ -1,0 +1,20 @@
+.center_flags {
+    text-align: center;
+}
+
+.flag {
+    background-size: cover;
+    width: 32px;
+    height: 24px;
+    border-radius: 7px;
+    border: 0 solid;
+    margin: 0 3px 5px;
+}
+
+.flag_pl {
+    background-image: url('../icons/pl.svg');
+}
+
+.flag_gb {
+    background-image: url('../icons/en.svg');
+}

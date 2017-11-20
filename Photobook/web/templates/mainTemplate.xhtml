@@ -2,7 +2,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <!-- Localisation -->
+    <f:loadBundle basename="locales.locale" var="msg" />
 
     <h:head>
         <!-- Bootstrap -->
@@ -13,6 +17,7 @@
         
         <!-- Custom CSS -->
         <h:outputStylesheet name="/css/mainLayout.css" />
+        <h:outputStylesheet name="/css/flagIcons.css" />
         
         <!-- Mobile devices integration -->
         <meta name="viewport"
@@ -32,10 +37,21 @@
                         <h1>Photobook</h1>
                     </header>
                     
+                    <hr />
+                    
                     <ui:insert name="left"></ui:insert>
                     
+                    <hr />
+                    
+                    <aside class="center_flags">
+                        <h:form>
+                            <h:commandButton class="flag flag_pl" action="#{language.polish}" />
+                            <h:commandButton class="flag flag_gb" action="#{language.english}" />
+                        </h:form>
+                    </aside>
+                    
                     <footer>
-                       Authors: Wojciech Byczyński, Sławomir Chabowski
+                       #{msg.sidebar_authors}: Sławomir Chabowski, Wojciech Byczyński
                     </footer>
                 </div>
                 
