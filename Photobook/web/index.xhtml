@@ -22,15 +22,15 @@
                 
                 <nav>
                     <ul id="left_bar_navigation">
-                        <li><h:button value="Index 2" outcome="index2" class="btn-space btn btn-sm btn-block btn-outline-light"></h:button></li>
-                        <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-light">Link placeholder</a></li>
-                        <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-light">Link placeholder</a></li>
-                        <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-light">Link placeholder</a></li>
-                        <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-light">Link placeholder</a></li>
-                        <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-light">Link placeholder</a></li>
-                        <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-light">Link placeholder</a></li>
-                        <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-light">Link placeholder</a></li>
-                        <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-light">Link placeholder</a></li>
+                        <li><h:button value="Index 2" outcome="index2" class="btn-space btn btn-sm btn-block btn-outline-info"></h:button></li>
+                        <li><h:button value="View profile" outcome="viewProfile" class="btn-space btn btn-sm btn-block btn-outline-info"></h:button></li>
+                        <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-info">Link placeholder</a></li>
+                        <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-info">Link placeholder</a></li>
+                        <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-info">Link placeholder</a></li>
+                        <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-info">Link placeholder</a></li>
+                        <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-info">Link placeholder</a></li>
+                        <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-info">Link placeholder</a></li>
+                        <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-info">Link placeholder</a></li>
                     </ul>
                 </nav>
                 
@@ -42,6 +42,96 @@
                     <p>
                         #{msg.index_welcomeMessage}
                     </p>
+                </div>
+                
+                <div id="recently_added_images" style="margin-top: 30px;">
+                    
+                    <h3 class="display-4">#{msg.index_recentlyAdded}</h3>
+
+                    <div style="width: 100%; text-align: center;">
+                        
+                        
+                        <div class="thumbnail_container">
+                            <h:graphicImage class="img-thumbnail thumbnail_image" library="user-images" name="img_01.jpg" />
+                            <div class="overlay">
+                                <div class="text">
+                                    <span class="img_title">Tytuł zdjęcia</span>
+                                    <a class="img_author" href="#">Autor zdjęcia</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="thumbnail_container">
+                            <h:graphicImage class="img-thumbnail thumbnail_image" library="user-images" name="img_02.jpg" />
+                            <div class="overlay">
+                                <div class="text">
+                                    <span class="img_title">Tytuł zdjęcia</span>
+                                    <a class="img_author" href="#">Autor zdjęcia</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="thumbnail_container">
+                            <h:graphicImage class="img-thumbnail thumbnail_image" library="user-images" name="img_03.jpg" />
+                            <div class="overlay">
+                                <div class="text">
+                                    <span class="img_title">Tytuł zdjęcia</span>
+                                    <a class="img_author" href="#">Autor zdjęcia</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="thumbnail_container">
+                            <h:graphicImage class="img-thumbnail thumbnail_image" library="user-images" name="img_04.jpg" />
+                            <div class="overlay">
+                                <div class="text">
+                                    <span class="img_title">Tytuł zdjęcia</span>
+                                    <a class="img_author" href="#">Autor zdjęcia</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="thumbnail_container">
+                            <h:graphicImage class="img-thumbnail thumbnail_image" library="user-images" name="img_05.jpg" />
+                            <div class="overlay">
+                                <div class="text">
+                                    <span class="img_title">Tytuł zdjęcia</span>
+                                    <a class="img_author" href="#">Autor zdjęcia</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="thumbnail_container">
+                            <h:graphicImage class="img-thumbnail thumbnail_image" library="user-images" name="img_06.jpg" />
+                            <div class="overlay">
+                                <div class="text">
+                                    <span class="img_title">Tytuł zdjęcia</span>
+                                    <a class="img_author" href="#">Autor zdjęcia</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="thumbnail_container">
+                            <h:graphicImage class="img-thumbnail thumbnail_image" library="user-images" name="img_07.jpg" />
+                            <div class="overlay">
+                                <div class="text">
+                                    <span class="img_title">Tytuł zdjęcia</span>
+                                    <a class="img_author" href="#">Autor zdjęcia</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="thumbnail_container">
+                            <h:graphicImage class="img-thumbnail thumbnail_image" library="user-images" name="img_08.jpg" />
+                            <div class="overlay">
+                                <div class="text">
+                                    <span class="img_title">Tytuł zdjęcia</span>
+                                    <a class="img_author" href="#">Autor zdjęcia</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        
                 </div>
                 
             </ui:define>

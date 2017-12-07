@@ -17,7 +17,9 @@
         
         <!-- Custom CSS -->
         <h:outputStylesheet name="/css/mainLayout.css" />
+        <h:outputStylesheet name="/css/profileStylesheets.css" />
         <h:outputStylesheet name="/css/flagIcons.css" />
+        <h:outputStylesheet name="/css/galleryView.css" />
         
         <!-- Mobile devices integration -->
         <meta name="viewport"
@@ -29,37 +31,42 @@
     </h:head>
 
     <h:body>
-        <div class="container-fluid">
-            <div class="row">
+        <div id="main_header" class="bg-info text-light">
+            <a href="#" id="toggle_menu_button" onClick="
+                var lcol = document.getElementById('left_column');
                 
-                <div id="left_column" class="col-2 bg-info text-light">
-                    <header>
-                        <h1>Photobook</h1>
-                    </header>
-                    
-                    <hr />
-                    
-                    <ui:insert name="left"></ui:insert>
-                    
-                    <hr />
-                    
-                    <aside class="center_flags">
-                        <h:form>
-                            <h:commandButton class="flag flag_pl" action="#{language.polish}" />
-                            <h:commandButton class="flag flag_gb" action="#{language.english}" />
-                        </h:form>
-                    </aside>
-                    
-                    <footer>
-                       #{msg.sidebar_authors}: Sławomir Chabowski, Wojciech Byczyński
-                    </footer>
-                </div>
-                
-                <div id="main_container" class="col-8">
-                    <ui:insert name="content"></ui:insert>
-                </div>
-                
+                if(lcol.style.display !== 'block')
+                    lcol.style.display = 'block';
+                else
+                    lcol.style.display = 'none';
+            ">☰</a>
+            <header><h1><h:link value="Photobook" outcome="index"></h:link></h1></header>
+        </div>
+        
+        <nav id="left_column">
+
+            <ui:insert name="left"></ui:insert>
+
+            <hr />
+
+            <aside class="center_flags">
+                <h:form>
+                    <h:commandButton class="flag flag_pl" action="#{language.polish}" />
+                    <h:commandButton class="flag flag_gb" action="#{language.english}" />
+                </h:form>
+            </aside>
+
+            <footer>
+               #{msg.sidebar_authors}: Sławomir Chabowski, Wojciech Byczyński
+            </footer>
+        </nav>
+        
+        <div class="container" style="padding-top: 30px;">
+
+            <div id="main">
+                <ui:insert name="content"></ui:insert>
             </div>
+
         </div>
     </h:body>
 

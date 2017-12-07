@@ -1,0 +1,150 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+        
+        <ui:composition template="./templates/mainTemplate.xhtml">
+
+            <ui:define name="left">
+                
+                <div id="login_box">
+                    #{msg.sidebar_notLoggedIn}
+                    <div class="btn-group" role="group">
+                        <h:button class="btn btn-light" value="#{msg.sidebar_login}" outcome="login"></h:button>
+                        <h:button class="btn btn-primary" value="#{msg.sidebar_register}" outcome="register"></h:button>
+                    </div>
+                </div>
+                
+                <hr />
+                
+                <nav>
+                    <ul id="left_bar_navigation">
+                        <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-light">Link placeholder</a></li>
+                        <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-light">Link placeholder</a></li>
+                        <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-light">Link placeholder</a></li>
+                        <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-light">Link placeholder</a></li>
+                        <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-light">Link placeholder</a></li>
+                        <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-light">Link placeholder</a></li>
+                        <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-light">Link placeholder</a></li>
+                        <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-light">Link placeholder</a></li>
+                        <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-light">Link placeholder</a></li>
+                    </ul>
+                </nav>
+                
+            </ui:define>
+
+            <ui:define name="content">
+                
+                <div id="profile_container" class="row">
+                    
+                    <div id="profile_avatar" class="col-3">&#160;</div>
+                    
+                    <div id="profile_details_left" class="col-5">
+                        <h3 class="display-4" style="margin-bottom: 0;">Username</h3>
+                        <span id="profile_name_details">Name and surname</span>
+                    </div>
+                    
+                    <div id="profile_details_right" class="col-5">
+                        Website: jakastamjest.com
+                    </div>
+                    
+                </div>
+                
+                <div id="recently_added_images" style="padding: 15px; margin-top: 30px;">
+                        <h3 class="display-4">#{msg.viewProfile_list}</h3>
+                        
+                        <div style="width: 100%; text-align: center;">
+                        
+                        
+                        <div class="thumbnail_container">
+                            <h:graphicImage class="img-thumbnail thumbnail_image" library="user-images" name="img_01.jpg" />
+                            <div class="overlay">
+                                <div class="text">
+                                    <span class="img_title">Tytuł zdjęcia</span>
+                                    <a class="img_author" href="#">Autor zdjęcia</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="thumbnail_container">
+                            <h:graphicImage class="img-thumbnail thumbnail_image" library="user-images" name="img_02.jpg" />
+                            <div class="overlay">
+                                <div class="text">
+                                    <span class="img_title">Tytuł zdjęcia</span>
+                                    <a class="img_author" href="#">Autor zdjęcia</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="thumbnail_container">
+                            <h:graphicImage class="img-thumbnail thumbnail_image" library="user-images" name="img_03.jpg" />
+                            <div class="overlay">
+                                <div class="text">
+                                    <span class="img_title">Tytuł zdjęcia</span>
+                                    <a class="img_author" href="#">Autor zdjęcia</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="thumbnail_container">
+                            <h:graphicImage class="img-thumbnail thumbnail_image" library="user-images" name="img_04.jpg" />
+                            <div class="overlay">
+                                <div class="text">
+                                    <span class="img_title">Tytuł zdjęcia</span>
+                                    <a class="img_author" href="#">Autor zdjęcia</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="thumbnail_container">
+                            <h:graphicImage class="img-thumbnail thumbnail_image" library="user-images" name="img_05.jpg" />
+                            <div class="overlay">
+                                <div class="text">
+                                    <span class="img_title">Tytuł zdjęcia</span>
+                                    <a class="img_author" href="#">Autor zdjęcia</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="thumbnail_container">
+                            <h:graphicImage class="img-thumbnail thumbnail_image" library="user-images" name="img_06.jpg" />
+                            <div class="overlay">
+                                <div class="text">
+                                    <span class="img_title">Tytuł zdjęcia</span>
+                                    <a class="img_author" href="#">Autor zdjęcia</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="thumbnail_container">
+                            <h:graphicImage class="img-thumbnail thumbnail_image" library="user-images" name="img_07.jpg" />
+                            <div class="overlay">
+                                <div class="text">
+                                    <span class="img_title">Tytuł zdjęcia</span>
+                                    <a class="img_author" href="#">Autor zdjęcia</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="thumbnail_container">
+                            <h:graphicImage class="img-thumbnail thumbnail_image" library="user-images" name="img_08.jpg" />
+                            <div class="overlay">
+                                <div class="text">
+                                    <span class="img_title">Tytuł zdjęcia</span>
+                                    <a class="img_author" href="#">Autor zdjęcia</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        
+                </div>
+                    
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

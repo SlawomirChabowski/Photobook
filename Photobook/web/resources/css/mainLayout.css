@@ -1,21 +1,50 @@
 @import url('https://fonts.googleapis.com/css?family=Lemon');
 
+#main_header {
+    padding-top: 10px;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+#main_header h1 {
+    font-family: 'Lemon', cursive;
+    font-size: 36px;
+    text-align: center;
+}
+
+#main_header h1 a, #toggle_menu_button,
+#main_header h1 a:hover, #toggle_menu_button:hover,
+#main_header h1 a:active, #toggle_menu_button:active,
+#main_header h1 a:visited, #toggle_menu_button:visited {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+#toggle_menu_button {
+    margin: 7px 15px;
+    position: fixed;
+    font-size: 18px !important;
+}
+
+
 #left_column {
     min-height: 100vh;
+    position: fixed;
+    width: 300px;
+    background-color: #f6f6f6;
+    display: none;
+    z-index: 999;
+    margin-top: 55px;
 }
 
 #left_column, #main_container {
     padding: 15px;
 }
 
-header h1 {
-    font-family: 'Lemon', cursive;
-    font-size: 36px;
-    text-align: center;
-}
 
 footer {
-    position: absolute;
+    position: fixed;
     font-size: 11px;
     bottom: 15px;
 }
@@ -24,7 +53,7 @@ footer {
     display: block;
     margin: 0 auto;
     border-radius: 3px;
-    background-color: rgba(0, 0, 0, 0.15);
+    background-color: rgba(17, 162, 184, 0.5);
     padding: 15px;
     text-align: center;
 }
@@ -62,7 +91,7 @@ li a {
     padding: 0;
 }
 
-#login_box a, #login_box a:visited {
+#login_box, #login_box a, #login_box a:visited {
     color: #ffffff;
 }
 

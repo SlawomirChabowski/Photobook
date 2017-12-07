@@ -1,0 +1,66 @@
+.thumbnail_container {
+    position: relative;
+    width: 350px;
+    height: 250px;
+    padding: 3px;
+    display: inline-block;
+}
+
+.thumbnail_image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-height: 250px;
+    object-fit: cover;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12),
+        0 1px 2px rgba(0,0,0,0.24);
+    webkit-transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.thumbnail_image:hover {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25),
+        0 10px 10px rgba(0,0,0,0.22);
+}
+
+.overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    height: 0;
+    webkit-transition: .5s ease;
+    transition: .5s ease;
+    margin: 8px;
+}
+
+.thumbnail_container:hover .overlay {
+    height: 40%;
+}
+
+.text {
+    white-space: nowrap; 
+    color: white;
+    font-size: 20px;
+    position: absolute;
+    overflow: hidden;
+    bottom: 10px;
+    left: 10px;
+    text-align: left;
+    line-height: 20px;
+}
+
+.img_title {
+    display: block;
+}
+
+.img_author,
+.img_author:active,
+.img_author:hover,
+.img_author:visited {
+    font-size: 12px;
+    color: #ffffff;
+}
