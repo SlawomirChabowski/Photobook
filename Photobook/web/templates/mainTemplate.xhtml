@@ -35,10 +35,14 @@
             <a href="#" id="toggle_menu_button" onClick="
                 var lcol = document.getElementById('left_column');
                 
-                if(lcol.style.display !== 'block')
+                if(lcol.style.display !== 'block') {
+                    lcol.style.animation = 'fadein 0.2s';
                     lcol.style.display = 'block';
-                else
-                    lcol.style.display = 'none';
+                }
+                else {
+                    lcol.style.animation = 'fadeout 0.2s';
+                    setTimeout(function() {lcol.style.display = 'none'}, 200);
+                }
             ">☰</a>
             <header><h1><h:link value="Photobook" outcome="index"></h:link></h1></header>
         </div>
