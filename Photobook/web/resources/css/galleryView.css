@@ -1,9 +1,20 @@
 .thumbnail_container {
     position: relative;
-    width: 350px;
-    height: 250px;
     padding: 3px;
     display: inline-block;
+}
+
+@media (min-width: 768px) {
+    .thumbnail_container {
+        width: 350px;
+        height: 250px;
+    }
+}
+
+@media (max-width: 767px) {
+    .thumbnail_container {
+        width: 100%;
+    }
 }
 
 .thumbnail_image {

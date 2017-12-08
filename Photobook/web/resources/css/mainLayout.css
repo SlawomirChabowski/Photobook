@@ -27,11 +27,21 @@
     font-size: 18px !important;
 }
 
+@media (min-width: 768px) {
+    #left_column {
+        width: 300px;
+    }
+}
+
+@media (max-width: 767px) {
+    #left_column {
+        width: 100%;
+    }
+}
 
 #left_column {
     min-height: 100vh;
     position: fixed;
-    width: 300px;
     background-color: #f6f6f6;
     display: none;
     z-index: 999;
