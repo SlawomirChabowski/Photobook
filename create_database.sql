@@ -26,7 +26,7 @@ CREATE TABLE tags (
 CREATE TABLE image (
 	id INT NOT NULL AUTO_INCREMENT,
 	title CHAR(100) NOT NULL,
-	description CHAR(10000),
+	description BLOB,
 	date_added DATETIME DEFAULT now() NOT NULL,
 	category_id INT NOT NULL UNIQUE,
 	author_id INT NOT NULL UNIQUE,
