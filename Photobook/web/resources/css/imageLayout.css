@@ -1,0 +1,33 @@
+.no_comments_box_outer {
+    display: table;
+    /* display: none; */
+    background-color: #d0d0d0;
+    border-radius: 15px;
+}
+
+.no_comments_box_inner {
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 36px;
+    color: #909090;
+    width: 100vw;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    text-align: center;
+}
+
+#add_new_comment {
+    margin-bottom: 15px;
+}
+
+.input_comment {
+    border: 1px inset;
+    border-radius: 5px;
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+#add_new_comment button {
+    right: 0;
+}

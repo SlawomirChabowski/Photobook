@@ -9,15 +9,16 @@
 }
 
 #profile_avatar {
-    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top center;
     background-image: url('../images/avatar-placeholder.png');
     display: table-cell;
-    height: 320px;
+    height: 250px;
 }
 
 #profile_details_left {
     display: table-cell;
-    vertical-align: middle;
+    vertical-align: top;
     padding: 20px;
     width: 30%;
 }
@@ -30,6 +31,6 @@
 
 #profile_details_right {
     display: table-cell;
-    vertical-align: middle;
-    text-align: right;
+    vertical-align: top;
+    text-align: left;
 }
