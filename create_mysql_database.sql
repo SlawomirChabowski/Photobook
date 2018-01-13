@@ -4,7 +4,7 @@ CREATE TABLE user (
 	id INT NOT NULL AUTO_INCREMENT,
 	nickname CHAR(20) NOT NULL UNIQUE,
 	email CHAR(255) NOT NULL UNIQUE CHECK (email LIKE '%@%.%'),
-	password CHAR(20) NOT NULL UNIQUE,
+	password CHAR(20) NOT NULL CHECK (password > 6),
 	role INT DEFAULT 1,												-- 0 - admin; 1 - user
 	date_joined DATETIME DEFAULT now() NOT NULL,
 	website CHAR(255),
