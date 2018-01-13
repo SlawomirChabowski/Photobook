@@ -1,12 +1,15 @@
+-- MySQL database tables
+
 CREATE TABLE user (
 	id INT NOT NULL AUTO_INCREMENT,
 	nickname CHAR(20) NOT NULL UNIQUE,
 	email CHAR(255) NOT NULL UNIQUE CHECK (email LIKE '%@%.%'),
 	password CHAR(20) NOT NULL UNIQUE,
+	role INT DEFAULT 1,												-- 0 - admin; 1 - user
 	date_joined DATETIME DEFAULT now() NOT NULL,
 	website CHAR(255),
 	about TEXT,
-	avatar_img_name CHAR(255) UNIQUE,
+	avatar_img_name CHAR(255) UNIQUE,								-- all images will be storeg on the server
 	PRIMARY KEY(id)
 );
 
@@ -17,14 +20,8 @@ CREATE TABLE categories (
 	PRIMARY KEY(id)
 );
 
-CREATE TABLE tags (
-	id INT NOT NULL AUTO_INCREMENT,
-	tag CHAR(20) NOT NULL UNIQUE,
-	PRIMARY KEY(id)
-);
-
-CREATE TABLE image (
-	id INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE image (												-- the following table stores the INFORMATION
+	id INT NOT NULL AUTO_INCREMENT,									-- about the photo, NOT the image
 	title CHAR(100) NOT NULL,
 	description BLOB,
 	date_added DATETIME DEFAULT now() NOT NULL,
@@ -34,13 +31,6 @@ CREATE TABLE image (
 	PRIMARY KEY(id),
 	FOREIGN KEY(category_id) REFERENCES categories(id),
 	FOREIGN KEY(author_id) REFERENCES user(id)
-);
-
-CREATE TABLE tags_list (
-	id_image INT NOT NULL UNIQUE,
-	id_tag INTEGER NOT NULL,
-	FOREIGN KEY(id_image) REFERENCES image(id),
-	FOREIGN KEY(id_tag) REFERENCES tags(id)
 );
 
 CREATE TABLE mark (
