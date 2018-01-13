@@ -24,6 +24,7 @@ CREATE TABLE image (												-- the following table stores the INFORMATION
 	id INT NOT NULL AUTO_INCREMENT,									-- about the photo, NOT the image
 	title CHAR(100) NOT NULL,
 	description BLOB,
+	tags BLOB,
 	date_added DATETIME DEFAULT now() NOT NULL,
 	category_id INT NOT NULL UNIQUE,
 	author_id INT NOT NULL UNIQUE,
