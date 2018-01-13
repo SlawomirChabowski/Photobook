@@ -6,6 +6,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -17,13 +18,14 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -38,6 +40,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "User.findByNickname", query = "SELECT u FROM User u WHERE u.nickname = :nickname")
     , @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email")
     , @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password")
+    , @NamedQuery(name = "User.findByRole", query = "SELECT u FROM User u WHERE u.role = :role")
     , @NamedQuery(name = "User.findByDateJoined", query = "SELECT u FROM User u WHERE u.dateJoined = :dateJoined")
     , @NamedQuery(name = "User.findByWebsite", query = "SELECT u FROM User u WHERE u.website = :website")
     , @NamedQuery(name = "User.findByAvatarImgName", query = "SELECT u FROM User u WHERE u.avatarImgName = :avatarImgName")})
@@ -65,6 +68,8 @@ public class User implements Serializable {
     @Size(min = 1, max = 20)
     @Column(name = "password")
     private String password;
+    @Column(name = "role")
+    private Integer role;
     @Basic(optional = false)
     @NotNull
     @Column(name = "date_joined")
@@ -80,10 +85,12 @@ public class User implements Serializable {
     @Size(max = 255)
     @Column(name = "avatar_img_name")
     private String avatarImgName;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
-    private Image image;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
-    private Mark mark;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private Collection<Image> imageCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private Collection<Comment> commentCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private Collection<Mark> markCollection;
 
     public User() {
     }
@@ -132,6 +139,14 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    public Integer getRole() {
+        return role;
+    }
+
+    public void setRole(Integer role) {
+        this.role = role;
+    }
+
     public Date getDateJoined() {
         return dateJoined;
     }
@@ -164,20 +179,31 @@ public class User implements Serializable {
         this.avatarImgName = avatarImgName;
     }
 
-    public Image getImage() {
-        return image;
+    @XmlTransient
+    public Collection<Image> getImageCollection() {
+        return imageCollection;
     }
 
-    public void setImage(Image image) {
-        this.image = image;
+    public void setImageCollection(Collection<Image> imageCollection) {
+        this.imageCollection = imageCollection;
     }
 
-    public Mark getMark() {
-        return mark;
+    @XmlTransient
+    public Collection<Comment> getCommentCollection() {
+        return commentCollection;
     }
 
-    public void setMark(Mark mark) {
-        this.mark = mark;
+    public void setCommentCollection(Collection<Comment> commentCollection) {
+        this.commentCollection = commentCollection;
+    }
+
+    @XmlTransient
+    public Collection<Mark> getMarkCollection() {
+        return markCollection;
+    }
+
+    public void setMarkCollection(Collection<Mark> markCollection) {
+        this.markCollection = markCollection;
     }
 
     @Override
@@ -202,7 +228,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "utils.User[ id=" + id + " ]";
+        return "entities.User[ id=" + id + " ]";
     }
     
 }

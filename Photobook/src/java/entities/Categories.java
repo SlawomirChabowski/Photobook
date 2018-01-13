@@ -6,6 +6,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,11 +17,12 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -50,8 +52,8 @@ public class Categories implements Serializable {
     @Size(max = 65535)
     @Column(name = "description")
     private String description;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "categories")
-    private Image image;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "categories")
+    private Collection<Image> imageCollection;
 
     public Categories() {
     }
@@ -89,12 +91,13 @@ public class Categories implements Serializable {
         this.description = description;
     }
 
-    public Image getImage() {
-        return image;
+    @XmlTransient
+    public Collection<Image> getImageCollection() {
+        return imageCollection;
     }
 
-    public void setImage(Image image) {
-        this.image = image;
+    public void setImageCollection(Collection<Image> imageCollection) {
+        this.imageCollection = imageCollection;
     }
 
     @Override
@@ -119,7 +122,7 @@ public class Categories implements Serializable {
 
     @Override
     public String toString() {
-        return "utils.Categories[ id=" + id + " ]";
+        return "entities.Categories[ id=" + id + " ]";
     }
     
 }

@@ -6,6 +6,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,7 +18,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -25,13 +29,14 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Slawek
  */
 @Entity
-@Table(name = "mark")
+@Table(name = "comment")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Mark.findAll", query = "SELECT m FROM Mark m")
-    , @NamedQuery(name = "Mark.findById", query = "SELECT m FROM Mark m WHERE m.id = :id")
-    , @NamedQuery(name = "Mark.findByValue", query = "SELECT m FROM Mark m WHERE m.value = :value")})
-public class Mark implements Serializable {
+    @NamedQuery(name = "Comment.findAll", query = "SELECT c FROM Comment c")
+    , @NamedQuery(name = "Comment.findById", query = "SELECT c FROM Comment c WHERE c.id = :id")
+    , @NamedQuery(name = "Comment.findByCommentText", query = "SELECT c FROM Comment c WHERE c.commentText = :commentText")
+    , @NamedQuery(name = "Comment.findByDateAdded", query = "SELECT c FROM Comment c WHERE c.dateAdded = :dateAdded")})
+public class Comment implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -39,10 +44,14 @@ public class Mark implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
+    @Size(max = 10000)
+    @Column(name = "comment_text")
+    private String commentText;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "value")
-    private short value;
+    @Column(name = "date_added")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateAdded;
     @JoinColumn(name = "image_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Image image;
@@ -50,16 +59,16 @@ public class Mark implements Serializable {
     @ManyToOne(optional = false)
     private User user;
 
-    public Mark() {
+    public Comment() {
     }
 
-    public Mark(Integer id) {
+    public Comment(Integer id) {
         this.id = id;
     }
 
-    public Mark(Integer id, short value) {
+    public Comment(Integer id, Date dateAdded) {
         this.id = id;
-        this.value = value;
+        this.dateAdded = dateAdded;
     }
 
     public Integer getId() {
@@ -70,12 +79,20 @@ public class Mark implements Serializable {
         this.id = id;
     }
 
-    public short getValue() {
-        return value;
+    public String getCommentText() {
+        return commentText;
     }
 
-    public void setValue(short value) {
-        this.value = value;
+    public void setCommentText(String commentText) {
+        this.commentText = commentText;
+    }
+
+    public Date getDateAdded() {
+        return dateAdded;
+    }
+
+    public void setDateAdded(Date dateAdded) {
+        this.dateAdded = dateAdded;
     }
 
     public Image getImage() {
@@ -104,10 +121,10 @@ public class Mark implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Mark)) {
+        if (!(object instanceof Comment)) {
             return false;
         }
-        Mark other = (Mark) object;
+        Comment other = (Comment) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -116,7 +133,7 @@ public class Mark implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Mark[ id=" + id + " ]";
+        return "entities.Comment[ id=" + id + " ]";
     }
     
 }

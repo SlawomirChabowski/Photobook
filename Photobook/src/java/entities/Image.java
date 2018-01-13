@@ -6,6 +6,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -16,15 +17,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -55,6 +58,9 @@ public class Image implements Serializable {
     @Lob
     @Column(name = "description")
     private byte[] description;
+    @Lob
+    @Column(name = "tags")
+    private byte[] tags;
     @Basic(optional = false)
     @NotNull
     @Column(name = "date_added")
@@ -66,13 +72,15 @@ public class Image implements Serializable {
     @Column(name = "img_file_name")
     private String imgFileName;
     @JoinColumn(name = "category_id", referencedColumnName = "id")
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     private Categories categories;
     @JoinColumn(name = "author_id", referencedColumnName = "id")
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     private User user;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "image")
-    private Mark mark;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "image")
+    private Collection<Comment> commentCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "image")
+    private Collection<Mark> markCollection;
 
     public Image() {
     }
@@ -112,6 +120,14 @@ public class Image implements Serializable {
         this.description = description;
     }
 
+    public byte[] getTags() {
+        return tags;
+    }
+
+    public void setTags(byte[] tags) {
+        this.tags = tags;
+    }
+
     public Date getDateAdded() {
         return dateAdded;
     }
@@ -144,12 +160,22 @@ public class Image implements Serializable {
         this.user = user;
     }
 
-    public Mark getMark() {
-        return mark;
+    @XmlTransient
+    public Collection<Comment> getCommentCollection() {
+        return commentCollection;
     }
 
-    public void setMark(Mark mark) {
-        this.mark = mark;
+    public void setCommentCollection(Collection<Comment> commentCollection) {
+        this.commentCollection = commentCollection;
+    }
+
+    @XmlTransient
+    public Collection<Mark> getMarkCollection() {
+        return markCollection;
+    }
+
+    public void setMarkCollection(Collection<Mark> markCollection) {
+        this.markCollection = markCollection;
     }
 
     @Override
@@ -174,7 +200,7 @@ public class Image implements Serializable {
 
     @Override
     public String toString() {
-        return "utils.Image[ id=" + id + " ]";
+        return "entities.Image[ id=" + id + " ]";
     }
     
 }
