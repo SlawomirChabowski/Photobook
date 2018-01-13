@@ -49,8 +49,69 @@
         </div>
         
         <nav id="left_column">
+            
+            <!-- When logged in -->
+            <h:form rendered="#{login.logged}">
+                <div id="login_box">
+                    <div class="row" style="margin-bottom: 10px;">
 
-            <ui:insert name="left"></ui:insert>
+                        <div class="col-sm-5">
+
+                            <h:graphicImage class="avatar_image rounded-circle" value="resources/images/avatar-placeholder.png" alt="#{msg.sidebar_usersAvatar}" />
+
+                        </div>
+
+                        <div class="col-sm-7">
+
+                            <p class="logged_in_message">
+                                #{msg.sidebar_loggedIn}:
+                                <br />
+
+                                <a href="#">
+                                    <strong>Nazwa Użytkownika</strong>
+                                </a>
+                            </p>
+
+                            <ul id="profile_navigation" class="logged_in_message">
+                                <li><a href="#">#{msg.sidebar_addNew}</a></li>
+                                <li><a href="#">#{msg.sidebar_goToSettings}</a></li>
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                    <h:commandButton class="btn btn-block btn-sm btn-danger" value="#{msg.sidebar_logoutMessage}" action="#{login.logout()}" />
+                </div>
+            </h:form>
+            <!-- End when logged in -->
+
+            <!-- When not logged in -->
+            <h:form rendered="#{not login.logged}">
+                <div id="login_box">
+                    #{msg.sidebar_notLoggedIn}
+                    <div class="btn-group" role="group">
+                        <h:button class="btn btn-light" value="#{msg.sidebar_login}" outcome="login"></h:button>
+                        <h:button class="btn btn-primary" value="#{msg.sidebar_register}" outcome="register"></h:button>
+                    </div>
+                </div>
+            </h:form>
+            <!-- End when not logged in -->
+
+            <hr />
+
+            <nav>
+                <ul id="left_bar_navigation">
+                    <li><h:button value="View profile" outcome="viewProfile" class="btn-space btn btn-sm btn-block btn-outline-info"></h:button></li>
+                    <li><h:button value="View image" outcome="viewImage" class="btn-space btn btn-sm btn-block btn-outline-info"></h:button></li>
+                    <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-info">Link placeholder</a></li>
+                    <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-info">Link placeholder</a></li>
+                    <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-info">Link placeholder</a></li>
+                    <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-info">Link placeholder</a></li>
+                    <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-info">Link placeholder</a></li>
+                    <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-info">Link placeholder</a></li>
+                </ul>
+            </nav>
 
             <hr />
 

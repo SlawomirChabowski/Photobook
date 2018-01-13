@@ -8,34 +8,6 @@
         
         <ui:composition template="./templates/mainTemplate.xhtml">
 
-            <ui:define name="left">
-                
-                <div id="login_box">
-                    #{msg.sidebar_notLoggedIn}
-                    <div class="btn-group" role="group">
-                        <h:button class="btn btn-light" value="#{msg.sidebar_login}" outcome="login"></h:button>
-                        <h:button class="btn btn-primary" value="#{msg.sidebar_register}" outcome="register"></h:button>
-                    </div>
-                </div>
-                
-                <hr />
-                
-                <nav>
-                    <ul id="left_bar_navigation">
-                        <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-info">Link placeholder</a></li>
-                        <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-info">Link placeholder</a></li>
-                        <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-info">Link placeholder</a></li>
-                        <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-info">Link placeholder</a></li>
-                        <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-info">Link placeholder</a></li>
-                        <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-info">Link placeholder</a></li>
-                        <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-info">Link placeholder</a></li>
-                        <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-info">Link placeholder</a></li>
-                        <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-info">Link placeholder</a></li>
-                    </ul>
-                </nav>
-                
-            </ui:define>
-
             <ui:define name="content">
                 
                 <div id="profile_container" class="row">

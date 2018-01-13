@@ -8,34 +8,6 @@
 
         <ui:composition template="./templates/mainTemplate.xhtml">
 
-            <ui:define name="left">
-                
-                <div id="login_box">
-                    #{msg.sidebar_notLoggedIn}
-                    <div class="btn-group" role="group">
-                        <h:button class="btn btn-light" value="#{msg.sidebar_login}" outcome="login"></h:button>
-                        <h:button class="btn btn-primary" value="#{msg.sidebar_register}" outcome="register"></h:button>
-                    </div>
-                </div>
-                
-                <hr />
-                
-                <nav>
-                    <ul id="left_bar_navigation">
-                        <li><h:button value="Index 2" outcome="index2" class="btn-space btn btn-sm btn-block btn-outline-info"></h:button></li>
-                        <li><h:button value="View profile" outcome="viewProfile" class="btn-space btn btn-sm btn-block btn-outline-info"></h:button></li>
-                        <li><h:button value="View image" outcome="viewImage" class="btn-space btn btn-sm btn-block btn-outline-info"></h:button></li>
-                        <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-info">Link placeholder</a></li>
-                        <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-info">Link placeholder</a></li>
-                        <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-info">Link placeholder</a></li>
-                        <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-info">Link placeholder</a></li>
-                        <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-info">Link placeholder</a></li>
-                        <li><a href="#" class="btn-space btn btn-sm btn-block btn-outline-info">Link placeholder</a></li>
-                    </ul>
-                </nav>
-                
-            </ui:define>
-
             <ui:define name="content">
                 <div class="jumbotron jum-bg">
                     <div class="jum-bg-overlay">

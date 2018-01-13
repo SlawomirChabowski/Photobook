@@ -21,7 +21,7 @@
                         <h:inputText class="full_size_input" value="#{login.userName}" a:placeholder="#{msg.login_username}" />
                         <h:inputSecret class="full_size_input" value="#{login.userPassword}" a:placeholder="#{msg.login_password}" />
 
-                        <h:commandButton class="btn btn-lg btn-success login_button" value="#{msg.login_loginButton}"/>
+                        <h:commandButton class="btn btn-lg btn-success login_button" value="#{msg.login_loginButton}" action="#{login.login()}"/>
                         
                         <h:link outcome="register">
                             <p class="text-info register_link">#{msg.login_noAccountMessage}</p>
