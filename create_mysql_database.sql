@@ -9,7 +9,7 @@ CREATE TABLE user (
 	date_joined DATETIME DEFAULT now() NOT NULL,
 	website CHAR(255),
 	about TEXT,
-	avatar_img_name CHAR(255) UNIQUE,								-- all images will be storeg on the server
+	avatar_img_name CHAR(255),										-- all images will be storeg on the server
 	PRIMARY KEY(id)
 );
 
@@ -26,8 +26,8 @@ CREATE TABLE image (												-- the following table stores the INFORMATION
 	description BLOB,
 	tags BLOB,
 	date_added DATETIME DEFAULT now() NOT NULL,
-	category_id INT NOT NULL UNIQUE,
-	author_id INT NOT NULL UNIQUE,
+	category_id INT NOT NULL,
+	author_id INT NOT NULL,
 	img_file_name CHAR(255) NOT NULL UNIQUE,
 	PRIMARY KEY(id),
 	FOREIGN KEY(category_id) REFERENCES categories(id),
@@ -36,8 +36,8 @@ CREATE TABLE image (												-- the following table stores the INFORMATION
 
 CREATE TABLE mark (
 	id INT NOT NULL AUTO_INCREMENT,
-	image_id INT NOT NULL UNIQUE,
-	author_id INT NOT NULL UNIQUE,
+	image_id INT NOT NULL,
+	author_id INT NOT NULL,
 	value DECIMAL(1) NOT NULL,
 	PRIMARY KEY(id),
 	FOREIGN KEY(image_id) REFERENCES image(id),
