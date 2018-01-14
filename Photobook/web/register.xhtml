@@ -16,6 +16,27 @@
                             <h1 class="text-info title">Photobook</h1>
                         </h:link>
                         <hr />
+                        
+                        <!-- Form not filled properly -->
+                        <h:panelGroup rendered="#{register.notFilled}" layout="block" class="alert alert-danger">
+                            #{msg.register_notFilledAlert}
+                        </h:panelGroup>
+                        
+                        <!-- Passwords not match -->
+                        <h:panelGroup rendered="#{register.badPass}" layout="block" class="alert alert-danger">
+                            #{msg.register_badPasswords}
+                        </h:panelGroup>
+                        
+                        <!-- Username already taken -->
+                        <h:panelGroup rendered="#{register.badNick}" layout="block" class="alert alert-danger">
+                            #{msg.register_badNick}
+                        </h:panelGroup>
+                        
+                        <!-- Email already taken -->
+                        <h:panelGroup rendered="#{register.badEmail}" layout="block" class="alert alert-danger">
+                            #{msg.register_badEmail}
+                        </h:panelGroup>
+                        
                         <h2>#{msg.register_register}</h2>
                         
                         <h:inputText class="full_size_input" value="#{register.userName}" a:placeholder="#{msg.register_username}" />
@@ -25,7 +46,7 @@
                         <h:inputSecret class="full_size_input" value="#{register.password}" a:placeholder="#{msg.register_password}" />
                         <h:inputSecret class="full_size_input" value="#{register.confirmation}" a:placeholder="#{msg.register_confirm}" />
 
-                        <h:commandButton class="btn btn-lg btn-success login_button" value="#{msg.register_create}"/>
+                        <h:commandButton class="btn btn-lg btn-success login_button" value="#{msg.register_create}" action="#{register.register()}"/>
                         
                         <hr />
                         <p class="text-info">#{msg.register_optional}</p>

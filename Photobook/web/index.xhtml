@@ -3,13 +3,44 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
 
         <ui:composition template="./templates/mainTemplate.xhtml">
 
             <ui:define name="content">
+
+                <!-- If new account created -->
+                <h:panelGroup rendered="#{register.created}" id="registerMessage" layout="block" class="alert alert-success"
+                              style="z-index: 999;
+                              bottom: 0;
+                              position: fixed;
+                              left: 50%;
+                              transform: translate(-50%, 0);
+                              padding-left: 100px;
+                              padding-right: 100px;
+                              font-size: 24px;">
+                    #{msg.register_createdAccount}
+                    <script type="text/javascript">
+                        var elem = document.getElementById("registerMessage");
+                        setTimeout(function () {
+                            elem.style.animation = 'fadeout 1.0s';
+                            setTimeout(function () {
+                                elem.style.display = 'none'
+                            }, 1000)
+                        },
+                                5000);
+                        ;
+                    </script>
+                    <!-- Setting register.created to false -->
+                    <h:form>
+                        <p:remoteCommand autoRun="true" actionListener="#{register.setCreated(false)}" />
+                    </h:form>
+                </h:panelGroup>
+                <!-- End if new account created -->
+
                 <div class="jumbotron jum-bg">
                     <div class="jum-bg-overlay">
                         <h2 class="display-3">#{msg.index_welcomeTitle}</h2>
@@ -18,14 +49,14 @@
                         </p>
                     </div>
                 </div>
-                
+
                 <div id="recently_added_images" style="margin-top: 30px;">
-                    
+
                     <h3 class="display-4">#{msg.index_recentlyAdded}</h3>
 
                     <div style="width: 100%; text-align: center;">
-                        
-                        
+
+
                         <c:forEach items="${imageList.imageList}" var="element">
                             <div class="thumbnail_container">
                                 <h:graphicImage class="img-thumbnail thumbnail_image" library="user-images" name="#{element.imgFileName}" />
@@ -37,12 +68,12 @@
                                 </div>
                             </div>
                         </c:forEach>
-                        
-                        
+
+
                     </div>
-                        
+
                 </div>
-                
+
             </ui:define>
 
         </ui:composition>
