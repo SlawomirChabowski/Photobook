@@ -72,36 +72,8 @@ public class login implements Serializable {
         while(rs.next()){
             logged = true;
             badData = false;
-            if(rs.getString(9) != null)
-                avatarUrl = "user-avatars/" + rs.getString(9);
-            userId = rs.getInt(1);
-            return "index";
-        }
-        
-        badData = true;
-        avatarUrl = "images/avatar-placeholder.png";
-        userId = 0;
-        return "login";
-    }
-    
-    public String login(String userName, String userPassword) throws ClassNotFoundException, SQLException  {
-        String sterownik = "com.mysql.jdbc.Driver";
-        String url = "jdbc:mysql://localhost:3306/photobook";
-
-        Class.forName(sterownik);
-        System.out.println("sterownik OK");
-        Connection conn = DriverManager.getConnection(url, "root", "");         // db link, user, password
-        System.out.println("baza OK");
-        
-        Statement stm = conn.createStatement();                                 //uwaga na import - ma być z pakietu java.sql
-        String sql = "SELECT * FROM user WHERE nickname = '" + userName + "' AND password = '" + userPassword + "'";
-        ResultSet rs = stm.executeQuery(sql);
-        
-        while(rs.next()){
-            logged = true;
-            badData = false;
-            if(rs.getString(9) != null)
-                avatarUrl = "user-avatars/" + rs.getString(9);
+            if(rs.getString(11) != null)
+                avatarUrl = "user-avatars/" + rs.getString(11);
             userId = rs.getInt(1);
             return "index";
         }
