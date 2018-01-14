@@ -15,8 +15,13 @@ public class login implements Serializable {
     
     private String userName;
     private String userPassword;
+    private String avatarUrl = "images/avatar-placeholder.png";
     private boolean logged = false;
     private boolean badData = false;
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
 
     public boolean isBadData() {
         return badData;
@@ -68,10 +73,12 @@ public class login implements Serializable {
         while(rs.next()){
             logged = true;
             badData = false;
+            avatarUrl = "user-avatars/" + rs.getString(9);
             return "index";
         }
         
         badData = true;
+        avatarUrl = "images/avatar-placeholder.png";
         return "login";
     }
 }
