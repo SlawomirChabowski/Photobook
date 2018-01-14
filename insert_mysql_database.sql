@@ -5,12 +5,14 @@ INSERT INTO user (
 		nickname,
 		email,
 		password,
-		role
+		role,
+		avatar_img_name
 	) VALUES (
 		'Admin',
 		'admin@photobook.com',
 		'haslo123',
-		0
+		0,
+		'admin-avatar.png'
 );
 INSERT INTO user (
 		nickname,
