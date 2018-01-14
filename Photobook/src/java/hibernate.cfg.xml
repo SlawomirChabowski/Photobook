@@ -45,9 +45,10 @@ Contributor(s):
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/photobook?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
+    <mapping class="entities.Comment"/>
     <mapping class="entities.Categories"/>
-    <mapping class="entities.User"/>
-    <mapping class="entities.Image"/>
+    <mapping class="entities.Image" file="" jar="" package="" resource=""/>
     <mapping class="entities.Mark"/>
+    <mapping class="entities.User"/>
   </session-factory>
 </hibernate-configuration>

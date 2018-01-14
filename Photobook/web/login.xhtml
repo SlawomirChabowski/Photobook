@@ -16,6 +16,11 @@
                             <h1 class="text-info title">Photobook</h1>
                         </h:link>
                         <hr />
+                        
+                        <h:panelGroup rendered="#{login.badData}" layout="block" class="alert alert-danger">
+                            #{msg.login_alert}
+                        </h:panelGroup>
+                        
                         <h2>#{msg.login_login}</h2>
                         
                         <h:inputText class="full_size_input" value="#{login.userName}" a:placeholder="#{msg.login_username}" />

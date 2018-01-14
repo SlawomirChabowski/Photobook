@@ -1,7 +1,6 @@
 package beans;
 
 import entities.Image;
-import entities.User;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -12,17 +11,12 @@ import java.util.Date;
 import java.util.List;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
-import org.hibernate.SessionFactory;
 
-/**
- *
- * @author Slawek
- */
 @Named(value = "imageList")
 @Dependent
 public class imageList {
 
-    private static SessionFactory factory;
+    //private static SessionFactory factory;
     private List<Image> imageList = new ArrayList<Image>();
     private Date data = new Date(2017, 01, 01);
 
@@ -37,10 +31,10 @@ public class imageList {
 
         Class.forName(sterownik);
         System.out.println("sterownik OK");
-        Connection conn = DriverManager.getConnection(url, "root", "");
+        Connection conn = DriverManager.getConnection(url, "root", "");         // db link, user, password
         System.out.println("baza OK");
         
-        Statement stm = conn.createStatement(); //uwaga na import - ma być z pakietu java.sql
+        Statement stm = conn.createStatement();                                 //uwaga na import - ma być z pakietu java.sql
         String sql = "SELECT * FROM image ORDER BY date_added DESC LIMIT 6";
         ResultSet rs = stm.executeQuery(sql);
         
@@ -56,5 +50,25 @@ public class imageList {
             // 8 - img_file_name
             imageList.add(image);
         }
+
+        // image is not mapped???
+        
+        /*SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session sess = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = sess.beginTransaction();
+            
+            List<Image> imgs = sess.createQuery("FROM image").list();
+            
+            tx.commit();
+        }
+        catch (Exception e) {
+            if (tx!=null) tx.rollback();
+            throw e;
+        }
+        finally {
+            sess.close();
+        }*/
     }
 }

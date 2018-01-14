@@ -1,6 +1,11 @@
 package beans;
 
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 
@@ -10,7 +15,12 @@ public class login implements Serializable {
     
     private String userName;
     private String userPassword;
-    private boolean logged = true;
+    private boolean logged = false;
+    private boolean badData = false;
+
+    public boolean isBadData() {
+        return badData;
+    }
 
     public boolean isLogged() {
         return logged;
@@ -33,26 +43,8 @@ public class login implements Serializable {
     }
     
     // constructor
-    public login() {
- /*       SessionFactory factory = HibernateUtil.getSessionFactory();
-        Session sess = factory.openSession();
-        Transaction tx = null;
-        try {
-            tx = sess.beginTransaction();
-            List<User> users = sess.createQuery("from User").list();
-            for (User u : users) {
-                System.out.println(u);
-            }
-
-            tx.commit();
-        } catch (Exception e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            throw e;
-        } finally {
-            sess.close();
-        }*/
+    public login(){
+        
     }
     
     //methods
@@ -60,8 +52,26 @@ public class login implements Serializable {
         logged = false;
     }
     
-    public String login() {
-        logged = true;
-        return "index";
+    public String login() throws ClassNotFoundException, SQLException  {
+        String sterownik = "com.mysql.jdbc.Driver";
+        String url = "jdbc:mysql://localhost:3306/photobook";
+
+        Class.forName(sterownik);
+        System.out.println("sterownik OK");
+        Connection conn = DriverManager.getConnection(url, "root", "");         // db link, user, password
+        System.out.println("baza OK");
+        
+        Statement stm = conn.createStatement();                                 //uwaga na import - ma być z pakietu java.sql
+        String sql = "SELECT * FROM user WHERE nickname = '" + userName + "' AND password = '" + userPassword + "'";
+        ResultSet rs = stm.executeQuery(sql);
+        
+        while(rs.next()){
+            logged = true;
+            badData = false;
+            return "index";
+        }
+        
+        badData = true;
+        return "login";
     }
 }
