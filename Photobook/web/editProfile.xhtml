@@ -1,0 +1,207 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+    <body>
+
+        <ui:composition template="./templates/mainTemplate.xhtml">
+
+            <ui:define name="content">
+                
+                <!-- Shown only if settings saved -->
+                <h:panelGroup rendered="#{profileSettings.success}" id="savedSettings" layout="block" class="alert alert-success"
+                              style="z-index: 999;
+                              bottom: 0;
+                              position: fixed;
+                              left: 50%;
+                              transform: translate(-50%, 0);
+                              padding-left: 100px;
+                              padding-right: 100px;
+                              font-size: 24px;">
+                    #{msg.editProfile_saved}
+                    <script type="text/javascript">
+                        var elem = document.getElementById("savedSettings");
+                        setTimeout(function () {
+                            elem.style.animation = 'fadeout 1.0s';
+                            setTimeout(function () {
+                                elem.style.display = 'none'
+                            }, 1000)}, 5000);
+                    </script>
+                    <!-- Setting profileSettings.success to false -->
+                    <h:form>
+                        <p:remoteCommand autoRun="true" actionListener="#{profileSettings.setSuccess(false)}" />
+                    </h:form>
+                </h:panelGroup>
+                
+                <!-- Shown only if entered wrong password -->
+                <h:panelGroup rendered="#{profileSettings.invalidPassword}" id="incorrectPassword" layout="block" class="alert alert-danger"
+                              style="z-index: 999;
+                              bottom: 0;
+                              position: fixed;
+                              left: 50%;
+                              transform: translate(-50%, 0);
+                              padding-left: 100px;
+                              padding-right: 100px;
+                              font-size: 24px;">
+                    #{msg.editProfile_passwordIncorrect}
+                    <script type="text/javascript">
+                        var elem = document.getElementById("incorrectPassword");
+                        setTimeout(function () {
+                            elem.style.animation = 'fadeout 1.0s';
+                            setTimeout(function () {
+                                elem.style.display = 'none'
+                            }, 1000)}, 5000);
+                    </script>
+                    <!-- Setting register.created to false -->
+                    <h:form>
+                        <p:remoteCommand autoRun="true" actionListener="#{profileSettings.setInvalidPassword(false)}" />
+                    </h:form>
+                </h:panelGroup>
+                
+                <!-- Shown only if entered wrong email -->
+                <h:panelGroup rendered="#{profileSettings.badEmail}" id="incorrectEmail" layout="block" class="alert alert-danger"
+                              style="z-index: 999;
+                              bottom: 0;
+                              position: fixed;
+                              left: 50%;
+                              transform: translate(-50%, 0);
+                              padding-left: 100px;
+                              padding-right: 100px;
+                              font-size: 24px;">
+                    #{msg.editProfile_badEmail}
+                    <script type="text/javascript">
+                        var elem = document.getElementById("incorrectEmail");
+                        setTimeout(function () {
+                            elem.style.animation = 'fadeout 1.0s';
+                            setTimeout(function () {
+                                elem.style.display = 'none'
+                            }, 1000)}, 5000);
+                    </script>
+                    <!-- Setting register.created to false -->
+                    <h:form>
+                        <p:remoteCommand autoRun="true" actionListener="#{profileSettings.setBadEmail(false)}" />
+                    </h:form>
+                </h:panelGroup>
+                
+                <!-- Shown only if passwords are different -->
+                <h:panelGroup rendered="#{profileSettings.passwordsDiffer}" id="passwordsNotMatch" layout="block" class="alert alert-danger"
+                              style="z-index: 999;
+                              bottom: 0;
+                              position: fixed;
+                              left: 50%;
+                              transform: translate(-50%, 0);
+                              padding-left: 100px;
+                              padding-right: 100px;
+                              font-size: 24px;">
+                    #{msg.editProfile_passwordsDiffer}
+                    <script type="text/javascript">
+                        var elem = document.getElementById("passwordsNotMatch");
+                        setTimeout(function () {
+                            elem.style.animation = 'fadeout 1.0s';
+                            setTimeout(function () {
+                                elem.style.display = 'none'
+                            }, 1000)}, 5000);
+                    </script>
+                    <!-- Setting register.created to false -->
+                    <h:form>
+                        <p:remoteCommand autoRun="true" actionListener="#{profileSettings.setPasswordsDiffer(false)}" />
+                    </h:form>
+                </h:panelGroup>
+                
+                <h:form>
+                    
+                    <div class="row">
+                        <div class="col-9">
+                            <h3 class="display-4">#{msg.editProfile_title} #{profileSettings.nickname}</h3>
+                            <hr />
+                            <br />
+                            
+                            <h:form>
+
+                                <h4>#{msg.editProfile_basicInfo}</h4>
+                                <div class="form-group">
+                                    <h:outputText value="#{msg.editProfile_email}:&nbsp;" />
+                                    <h:inputText class="form-control" a:placeholder="#{profileSettings.email}" value="#{profileSettings.newEmail}" />
+                                </div>
+                                
+                                <div class="form-group">
+                                    
+                                    <h:outputText value="#{msg.editProfile_newPasswd}:&nbsp;" />
+                                    <h:inputSecret class="form-control" value="#{profileSettings.newPassword}" />
+                                    
+                                    <h:outputText value="#{msg.editProfile_confPasswd}:&nbsp;" />
+                                    <h:inputSecret class="form-control" value="#{profileSettings.newPasswordConfirmation}" />
+                                    
+                                </div>
+                                
+                                <hr />
+                                <h4>#{msg.editProfile_additionalInfo}</h4>
+                                
+                                <div class="form-group">Change avatar</div>
+                                
+                                <div class="form-group">
+                                    
+                                    <h:outputText value="#{msg.editProfile_name}:&nbsp;" />
+                                    <h:inputText id="inputName" class="form-control" a:value="#{profileSettings.name}" value="#{profileSettings.newName}" />
+                                    
+                                    <h:outputText value="#{msg.editProfile_surname}:&nbsp;" />
+                                    <h:inputText class="form-control" a:value="#{profileSettings.surname}" value="#{profileSettings.newSurname}" />
+                                    
+                                </div>
+                                
+                                <div class="form-group">
+                                    
+                                    <h:outputText value="#{msg.editProfile_website}:&nbsp;" />
+                                    <h:inputText class="form-control" a:value="#{profileSettings.website}" value="#{profileSettings.newWebsite}" />
+                                    
+                                    <h:outputText value="#{msg.editProfile_about}:&nbsp;" />
+                                    <h:inputTextarea class="form-control" value="#{profileSettings.newAbout}"/>
+                                    
+                                </div>
+                                    
+                                <hr />
+                                <h4>#{msg.editProfile_saveChangesLabel}</h4>
+                                
+                                <div class="form-group">
+                                    <h:outputText value="#{msg.editProfile_confirm}:&nbsp;" />
+                                    <h:inputSecret class="form-control" value="#{profileSettings.oldPassword}" />
+                                </div>
+                                
+                                <h:commandButton class="btn btn-primary" value="#{msg.editProfile_saveChangesButton}" action="#{profileSettings.setChanges()}" />
+
+                            </h:form>
+                            
+                        </div>
+                        
+                        <!-- Show current user avatar -->
+                        <div class="col-3">
+                            <img src="#{profileSettings.avatar}"
+                                 alt="User's avatar"
+                                 class="rounded-circle"
+                                 style="border: 7px solid #eeeeee;
+                                 box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);"/>
+
+                            <!--
+                            <h:form enctype="multipart/form-data">
+                                <p:fileUpload value="hasztag{profileSettings.avatarFile}" mode="simple"
+                                          allowTypes="/(\.|\/)(gif|jpg|jpeg|png)$/"/>
+                                <h:commandButton class="btn btn-primary pull-right" value="Zmień avatar" action="funkcja zmiany avatara" />
+
+                            </h:form>
+                            -->
+                        </div>
+                        
+                    </div>
+                    
+                </h:form>
+                
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

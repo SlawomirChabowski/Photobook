@@ -105,10 +105,10 @@ public class register implements Serializable {
         this.badNick    = false;
         this.badEmail   = false;
         
-        if(this.userName.equals(null) || this.userName.equals("") ||
-                this.email.equals(null) || this.email.equals("") ||
-                this.password.equals(null) || this.password.equals("") ||
-                this.confirmation.equals(null) || this.confirmation.equals("")) {
+        if(this.userName            == null || this.userName.trim().isEmpty()   ||
+                this.email          == null || this.email.trim().isEmpty()      ||
+                this.password       == null || this.password.trim().isEmpty()   ||
+                this.confirmation   == null || this.confirmation.trim().isEmpty()) {
             this.notFilled = true;
             return "register";
         }
@@ -145,7 +145,7 @@ public class register implements Serializable {
         
         // inserting the data
         try {
-            if((!this.name.equals(null) || !this.name.equals("")) && (!this.surname.equals(null) || !this.surname.equals(""))) {
+            if((!(this.name == null || this.name.trim().isEmpty())) && (!(this.surname == null || this.surname.trim().isEmpty()))) {
                 sql = "INSERT INTO user(nickname, email, password, name, surname) VALUES(?, ?, ?, ?, ?)";
                 PreparedStatement pstm = conn.prepareStatement(sql);
                 pstm.setString(1, this.userName);
@@ -154,7 +154,7 @@ public class register implements Serializable {
                 pstm.setString(4, this.name);
                 pstm.setString(5, this.surname);
                 pstm.execute();
-            } else if(this.name.equals(null) || !this.name.equals("")) {
+            } else if(this.name == null || this.name.trim().isEmpty()) {
                 sql = "INSERT INTO user(nickname, email, password, surname) VALUES(?, ?, ?, ?)";
                 PreparedStatement pstm = conn.prepareStatement(sql);
                 pstm.setString(1, this.userName);
@@ -162,7 +162,7 @@ public class register implements Serializable {
                 pstm.setString(3, this.password);
                 pstm.setString(4, this.surname);
                 pstm.execute();
-            } else if(!this.surname.equals(null) || !this.surname.equals("")) {
+            } else if(this.surname == null || this.surname.trim().isEmpty()) {
                 sql = "INSERT INTO user(nickname, email, password, name) VALUES(?, ?, ?, ?)";
                 PreparedStatement pstm = conn.prepareStatement(sql);
                 pstm.setString(1, this.userName);

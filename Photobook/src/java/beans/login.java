@@ -16,9 +16,9 @@ public class login implements Serializable {
     private String userName;
     private String userPassword;
     private String avatarUrl = "images/avatar-placeholder.png";
-    private int userId = 0;
     private boolean logged = false;
     private boolean badData = false;
+    public static int userId = 0;
 
     public String getAvatarUrl() {
         return avatarUrl;
@@ -52,11 +52,13 @@ public class login implements Serializable {
     public login(){}
     
     //methods
-    public void logout() {
+    public String logout() {
         logged = false;
+        return "index";
     }
     
     public String login() throws ClassNotFoundException, SQLException  {
+        
         String sterownik = "com.mysql.jdbc.Driver";
         String url = "jdbc:mysql://localhost:3306/photobook";
 
@@ -72,8 +74,10 @@ public class login implements Serializable {
         while(rs.next()){
             logged = true;
             badData = false;
-            if(rs.getString(11) != null)
+            if(!(rs.getString(11) == null))
                 avatarUrl = "user-avatars/" + rs.getString(11);
+            else
+                avatarUrl = "images/avatar-placeholder.png";
             userId = rs.getInt(1);
             return "index";
         }

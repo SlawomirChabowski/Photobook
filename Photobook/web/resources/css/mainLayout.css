@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Lemon');
 
+.container {
+    margin-bottom: 10px;
+}
+
 #main_header {
     padding-top: 10px;
     position: fixed;
@@ -47,6 +51,7 @@
     display: none;
     z-index: 999;
     margin-top: 55px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
 @keyframes fadein {
