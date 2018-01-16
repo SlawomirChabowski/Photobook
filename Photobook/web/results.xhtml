@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <body>
+
+        <ui:composition template="./templates/mainTemplate.xhtml">
+
+            <ui:define name="content">
+                
+                <h2 class="h1">#{msg.results_usersLabel}</h2>
+                <hr />
+                <h:panelGroup rendered="#{not searchBean.anyProfile}"
+                        style="display: block; width: 100%; text-align: center;"
+                        class="alert alert-secondary">
+                    <h4 class="alert-heading">#{msg.results_usersNotFound}</h4>
+                </h:panelGroup>
+                <h:panelGroup rendered="#{searchBean.anyProfile}">
+                    <c:forEach items="${searchBean.userList}" var="element">
+                        <div class="list-group">
+                            <h:button class="list-group-item list-group-item-action" value="#{element}" outcome="viewProfile?user=#{element}"/>
+                        </div>
+                    </c:forEach>
+                </h:panelGroup>
+                
+                <h2 class="h1" style="margin-top: 50px;">Obrazy</h2>
+                <hr />
+                <h:panelGroup rendered="#{not searchBean.anyImage}"
+                        style="display: block; width: 100%; text-align: center;"
+                        class="alert alert-secondary">
+                    <h4 class="alert-heading">#{msg.results_imagesNotFound}</h4>
+                </h:panelGroup>
+                
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
