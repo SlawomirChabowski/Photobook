@@ -66,10 +66,10 @@
                             <p class="logged_in_message">
                                 #{msg.sidebar_loggedIn}:
                                 <br />
-
-                                <a href="#">
-                                    <strong>#{login.userName}</strong>
-                                </a>
+                                
+                                <strong>
+                                    <h:link value="#{login.userName}" outcome="viewProfile?user=#{login.userName}" />
+                                </strong>
                             </p>
 
                             <ul id="profile_navigation" class="logged_in_message">
