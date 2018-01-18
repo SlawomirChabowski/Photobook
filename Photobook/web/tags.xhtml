@@ -11,31 +11,16 @@
 
             <ui:define name="content">
                 
-                <h2 class="h1">#{msg.results_usersLabel}</h2>
+                <h2 class="h1">#{msg.tags_titleLabel} "#{tagsBean.value}"</h2>
                 <hr />
-                <h:panelGroup rendered="#{not searchBean.anyProfile}"
+                <h:panelGroup rendered="#{not tagsBean.anyImage}"
                         style="display: block; width: 100%; text-align: center;"
                         class="alert alert-secondary">
-                    <h4 class="alert-heading">#{msg.results_usersNotFound}</h4>
+                    <h4 class="alert-heading">#{msg.tags_imagesNotFound} "#{tagsBean.value}"</h4>
                 </h:panelGroup>
-                <h:panelGroup rendered="#{searchBean.anyProfile}">
-                    <c:forEach items="${searchBean.userList}" var="element">
-                        <div class="list-group">
-                            <h:button class="list-group-item list-group-item-action" value="#{element}" outcome="viewProfile?user=#{element}"/>
-                        </div>
-                    </c:forEach>
-                </h:panelGroup>
-                
-                <h2 class="h1" style="margin-top: 50px;">#{msg.results_imagesLabel}</h2>
-                <hr />
-                <h:panelGroup rendered="#{not searchBean.anyImage}"
-                        style="display: block; width: 100%; text-align: center;"
-                        class="alert alert-secondary">
-                    <h4 class="alert-heading">#{msg.results_imagesNotFound}</h4>
-                </h:panelGroup>
-                <h:panelGroup rendered="#{searchBean.anyImage}">
+                <h:panelGroup rendered="#{tagsBean.anyImage}">
                     <div style="width: 100%; text-align: center; margin-top: 30px;">
-                        <c:forEach items="${searchBean.imageList}" var="element" >
+                        <c:forEach items="${tagsBean.imageList}" var="element" >
                             
                             <figure class="figurefx pushup img-thumbnail thumbnail_container">
                                 <h:graphicImage class="thumbnail-image thumbnail_image" library="user-images" name="#{element.img}" />	
