@@ -79,12 +79,14 @@ public class login implements Serializable {
             else
                 avatarUrl = "images/avatar-placeholder.png";
             userId = rs.getInt(1);
+            conn.close();
             return "index";
         }
         
         badData = true;
         avatarUrl = "images/avatar-placeholder.png";
         userId = 0;
+        conn.close();
         return "login";
     }
 }

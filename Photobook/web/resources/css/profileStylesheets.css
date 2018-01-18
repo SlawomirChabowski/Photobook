@@ -1,5 +1,4 @@
 #profile_container {
-    display: table;
     margin: 0 auto;
     margin-top: 10px;
     border-radius: 5px;
@@ -9,28 +8,15 @@
     background: #fafafa;
 }
 
-#profile_avatar {
-    background-repeat: no-repeat;
-    background-position: top center;
-    display: table-cell;
-    height: 250px;
+@media(max-width: 767px) {
+    #profile_avatar {
+        width: 100%;
+    }
 }
 
-#profile_details_left {
-    display: table-cell;
-    vertical-align: top;
-    padding: 20px;
-    width: 30%;
-}
-
-#profile_name_details {
-    font-weight: 100;
-    font-size: 24px;
-    padding-left: 5px;
-}
-
-#profile_details_right {
-    display: table-cell;
-    vertical-align: top;
-    text-align: left;
+@media(min-width: 768px) {
+    #profile_avatar {
+        max-height: 250px;
+        max-width: 250px;
+    }
 }

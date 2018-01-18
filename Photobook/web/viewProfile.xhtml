@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <body>
         
@@ -11,120 +12,47 @@
 
             <ui:define name="content">
                 <h:panelGroup rendered="#{profileViewBean.userFound}" style="display: inline;">
-
+                    
                     <div id="profile_container" class="row">
-
-                        <div id="profile_avatar"
-                             class="col-3"
-                             style="background-image: url('#{profileViewBean.avatar}');">&#160;</div>
-
-                        <div id="profile_details_left" class="col-5">
+                        <div class="col col-lg-3" style="text-align: center;">
+                            <img id="profile_avatar" class="thumbnail-image rounded-circle" src="#{profileViewBean.avatar}" />
+                        </div>
+                        <div class="col">
                             <h3 class="display-4" style="margin-bottom: 0;">#{profileViewBean.user}</h3>
                             <span id="profile_name_details">#{profileViewBean.name}&#160;#{profileViewBean.surname}</span>
                             <span class="text-muted">#{profileViewBean.website}</span>
                         </div>
-
-                        <div id="profile_details_right" class="col-5">
+                        <div class="col-md-auto">
                             <h:panelGroup rendered="#{profileViewBean.descExists}">
-                                <h3>#{msg.viewProfile_aboutTitle}</h3>
+                                <h3 style="margin-top: 15px;">#{msg.viewProfile_aboutTitle}</h3>
                                 <p>#{profileViewBean.about}</p>
                             </h:panelGroup>
                         </div>
-
                     </div>
                     
                     <h3 class="display-4" style="margin-top: 30px;">#{msg.viewProfile_list}</h3>
                     <hr />
 
-                    <h:panelGroup rendered="#{profileViewBean.photosFound}"
+                    <h:panelGroup rendered="#{profileViewBean.imagesFound}"
                                   id="recently_added_images"
                                   style="display: block; padding: 15px; margin-top: -25px;">
 
                         <div style="width: 100%; text-align: center;">
-                            <div class="thumbnail_container">
-                                <h:graphicImage class="img-thumbnail thumbnail_image" library="user-images" name="img_01.jpg" />
-                                <div class="overlay">
-                                    <div class="text">
-                                        <span class="img_title">Tytuł zdjęcia</span>
-                                    </div>
-                                </div>
-                            </div>
+                            <c:forEach items="${profileViewBean.imageList}" var="element" >
+                            
+                                <figure class="figurefx pushup img-thumbnail thumbnail_container">
+                                    <h:graphicImage class="thumbnail-image thumbnail_image" library="user-images" name="#{element.img}" />	
+                                    <figcaption>
+                                        <h3><h:link value="#{element.title}" outcome="viewImage?img=#{element.id}" /></h3>
+                                    </figcaption>
+                                </figure>
 
-                            <div class="thumbnail_container">
-                                <h:graphicImage class="img-thumbnail thumbnail_image" library="user-images" name="img_02.jpg" />
-                                <div class="overlay">
-                                    <div class="text">
-                                        <span class="img_title">Tytuł zdjęcia</span>
-                                        <a class="img_author" href="#">Autor zdjęcia</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="thumbnail_container">
-                                <h:graphicImage class="img-thumbnail thumbnail_image" library="user-images" name="img_03.jpg" />
-                                <div class="overlay">
-                                    <div class="text">
-                                        <span class="img_title">Tytuł zdjęcia</span>
-                                        <a class="img_author" href="#">Autor zdjęcia</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="thumbnail_container">
-                                <h:graphicImage class="img-thumbnail thumbnail_image" library="user-images" name="img_04.jpg" />
-                                <div class="overlay">
-                                    <div class="text">
-                                        <span class="img_title">Tytuł zdjęcia</span>
-                                        <a class="img_author" href="#">Autor zdjęcia</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="thumbnail_container">
-                                <h:graphicImage class="img-thumbnail thumbnail_image" library="user-images" name="img_05.jpg" />
-                                <div class="overlay">
-                                    <div class="text">
-                                        <span class="img_title">Tytuł zdjęcia</span>
-                                        <a class="img_author" href="#">Autor zdjęcia</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="thumbnail_container">
-                                <h:graphicImage class="img-thumbnail thumbnail_image" library="user-images" name="img_06.jpg" />
-                                <div class="overlay">
-                                    <div class="text">
-                                        <span class="img_title">Tytuł zdjęcia</span>
-                                        <a class="img_author" href="#">Autor zdjęcia</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="thumbnail_container">
-                                <h:graphicImage class="img-thumbnail thumbnail_image" library="user-images" name="img_07.jpg" />
-                                <div class="overlay">
-                                    <div class="text">
-                                        <span class="img_title">Tytuł zdjęcia</span>
-                                        <a class="img_author" href="#">Autor zdjęcia</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="thumbnail_container">
-                                <h:graphicImage class="img-thumbnail thumbnail_image" library="user-images" name="img_08.jpg" />
-                                <div class="overlay">
-                                    <div class="text">
-                                        <span class="img_title">Tytuł zdjęcia</span>
-                                        <a class="img_author" href="#">Autor zdjęcia</a>
-                                    </div>
-                                </div>
-                            </div>
-
+                            </c:forEach>
                         </div>
                     </h:panelGroup>
                             
                                 
-                    <h:panelGroup rendered="#{not profileViewBean.photosFound}"
+                    <h:panelGroup rendered="#{not profileViewBean.imagesFound}"
                                 style="display: block; width: 100%; margin-top: 20px; text-align: left;"
                                 class="alert alert-warning">
                         <h4 class="alert-heading">#{msg.viewProfile_imagesNotFoundTitle}</h4>

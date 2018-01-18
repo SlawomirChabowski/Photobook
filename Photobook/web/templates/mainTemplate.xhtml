@@ -102,7 +102,7 @@
             <hr />
 
             <h:form class="input-group input-group-sm mb-3">
-                <h:inputText class="form-control" a:placeholder="#{msg.sidebar_searchPlaceholder}" value="#{searchQuery}" />
+                <h:inputText class="form-control" a:placeholder="#{msg.sidebar_searchPlaceholder}" value="#{searchQuery}" autocomplete="false"/>
                 <div class="input-group-append">
                     <h:button class="btn btn-sm btn-primary" value="#{msg.sidebar_searchButton}" outcome="results?search=#{searchQuery}" />
                 </div>
@@ -110,7 +110,6 @@
             
             <nav>
                 <ul id="left_bar_navigation">
-                    <li><h:button value="View profile" outcome="viewProfile" class="btn-space btn btn-sm btn-block btn-outline-info"></h:button></li>
                     <li><h:button value="View image" outcome="viewImage" class="btn-space btn btn-sm btn-block btn-outline-info"></h:button></li>
                 </ul>
             </nav>

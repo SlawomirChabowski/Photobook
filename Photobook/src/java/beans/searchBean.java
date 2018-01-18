@@ -29,6 +29,9 @@ public class searchBean {
     private List<String> userList = new ArrayList<String>();
     public List<String> getUserList() { return userList; }
     
+    private List<imgListBean> imageList = new ArrayList<imgListBean>();
+    public List<imgListBean> getImageList() { return imageList; }
+    
     public searchBean() throws ClassNotFoundException, SQLException {
         if(this.search != null && !this.search.trim().equals("")) {
             String sterownik = "com.mysql.jdbc.Driver";
@@ -48,13 +51,20 @@ public class searchBean {
                 userList.add(rs.getString(2));
             }
 
-            sql = "SELECT * FROM image WHERE title LIKE '" + this.search + "' OR description LIKE '" + this.search + "' OR tags LIKE '" + this.search + "'";
+            sql = "SELECT i.*, u.nickname "
+                    + "FROM image i INNER JOIN user u ON u.id = i.author_id "
+                    + "WHERE i.title LIKE '%" + this.search + "%' "
+                    + "OR i.description LIKE '%" + this.search + "%' "
+                    + "OR i.tags LIKE '%" + this.search + "%'";
             rs = stm.executeQuery(sql);
 
             while(rs.next()) {
                 anyImage = true;
+                imgListBean image = new imgListBean(rs.getInt(1), rs.getString(8), rs.getString(2), rs.getString(9));
+                imageList.add(image);
             }
+            
+            conn.close();
         }
     }
-    
 }

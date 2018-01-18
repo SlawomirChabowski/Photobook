@@ -129,6 +129,7 @@ public class profileSettings implements Serializable {
         
         if(!this.oldPassword.equals(this.password)) {
             invalidPassword = true;
+            conn.close();
             return "editProfile";
         }
         
@@ -138,6 +139,7 @@ public class profileSettings implements Serializable {
             ResultSet rs = stm.executeQuery(sql1);
             while(rs.next()) {
                 badEmail = true;
+                conn.close();
                 return "editProfile";
             }
             
@@ -151,6 +153,7 @@ public class profileSettings implements Serializable {
             if(this.newPassword.length() < 5 || !this.newPassword.equals(this.newPasswordConfirmation)) {
                 System.out.println("\"" + this.newPassword + "\"");
                 passwordsDiffer = true;
+                conn.close();
                 return "editProfile";
             } else {
                 String sql = "UPDATE user SET password = ? WHERE id = " + login.userId;
@@ -175,6 +178,7 @@ public class profileSettings implements Serializable {
         statement.execute();
         
         success = true;
+        conn.close();
         return "editProfile";
     }
     

@@ -33,6 +33,21 @@
                         class="alert alert-secondary">
                     <h4 class="alert-heading">#{msg.results_imagesNotFound}</h4>
                 </h:panelGroup>
+                <h:panelGroup rendered="#{searchBean.anyImage}">
+                    <div style="width: 100%; text-align: center; margin-top: 30px;">
+                        <c:forEach items="${searchBean.imageList}" var="element" >
+                            
+                            <figure class="figurefx pushup img-thumbnail thumbnail_container">
+                                <h:graphicImage class="thumbnail-image thumbnail_image" library="user-images" name="#{element.img}" />	
+                                <figcaption>
+                                    <h3><h:link value="#{element.title}" outcome="viewImage?img=#{element.id}" /></h3>
+                                    <p><h:link value="#{element.author}" outcome="viewProfile?user=#{element.author}" /></p>
+                                </figcaption>
+                            </figure>
+
+                        </c:forEach>
+                    </div>
+                </h:panelGroup>
                 
             </ui:define>
 

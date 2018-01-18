@@ -132,6 +132,7 @@ public class register implements Serializable {
         
         while(rs.next()){
             badNick = true;
+            conn.close();
             return "register";
         }
         
@@ -140,6 +141,7 @@ public class register implements Serializable {
         
         while(rs.next()){
             badEmail = true;
+            conn.close();
             return "register";
         }
         
@@ -180,10 +182,12 @@ public class register implements Serializable {
             }
         } catch(Exception e) {
             this.notFilled = false;
+            conn.close();
             return "register";
         }
         
         this.created = true;
+        conn.close();
         return "index";
     }
     

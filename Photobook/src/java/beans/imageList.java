@@ -1,13 +1,11 @@
 package beans;
 
-import entities.Image;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
@@ -16,13 +14,8 @@ import javax.enterprise.context.Dependent;
 @Dependent
 public class imageList {
 
-    //private static SessionFactory factory;
-    private List<Image> imageList = new ArrayList<Image>();
-    private Date data = new Date(2017, 01, 01);
-
-    public List<Image> getImageList() {
-        return imageList;
-    }
+    private List<imgListBean> imageList = new ArrayList<imgListBean>();
+    public List<imgListBean> getImageList() { return imageList; }
     
     public imageList() throws ClassNotFoundException, SQLException {
         
@@ -35,40 +28,14 @@ public class imageList {
         System.out.println("baza OK");
         
         Statement stm = conn.createStatement();                                 //uwaga na import - ma być z pakietu java.sql
-        String sql = "SELECT * FROM image ORDER BY date_added DESC LIMIT 6";
+        String sql = "SELECT i.*, u.nickname FROM image i INNER JOIN user u ON u.id = i.author_id ORDER BY date_added DESC LIMIT 15";
         ResultSet rs = stm.executeQuery(sql);
         
         while(rs.next()){
-            Image image = new Image(rs.getInt(1), rs.getString(2), rs.getDate(5), rs.getString(8));
-            // 1 - id
-            // 2 - title
-            // 3 - description
-            // 4 - tags
-            // 5 - date
-            // 6 - category
-            // 7 - author
-            // 8 - img_file_name
+            imgListBean image = new imgListBean(rs.getInt(1), rs.getString(8), rs.getString(2), rs.getString(9));
             imageList.add(image);
         }
-
-        // image is not mapped???
         
-        /*SessionFactory factory = HibernateUtil.getSessionFactory();
-        Session sess = factory.openSession();
-        Transaction tx = null;
-        try {
-            tx = sess.beginTransaction();
-            
-            List<Image> imgs = sess.createQuery("FROM image").list();
-            
-            tx.commit();
-        }
-        catch (Exception e) {
-            if (tx!=null) tx.rollback();
-            throw e;
-        }
-        finally {
-            sess.close();
-        }*/
+        conn.close();
     }
 }
