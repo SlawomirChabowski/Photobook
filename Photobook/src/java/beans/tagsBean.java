@@ -37,12 +37,16 @@ public class tagsBean {
             System.out.println("baza OK");
 
             Statement stm = conn.createStatement();                                 //uwaga na import - ma być z pakietu java.sql
-            String sql = "SELECT * FROM image WHERE FIND_IN_SET('" + this.value + "', tags) OR FIND_IN_SET(' " + this.value + "', tags) OR FIND_IN_SET(' " + this.value + " ', tags)";
+            String sql = "SELECT i.*, u.nickname FROM image i "
+                    + "INNER JOIN user u ON i.author_id=u.id "
+                    + "WHERE FIND_IN_SET('" + this.value + "', tags) "
+                    + "OR FIND_IN_SET(' " + this.value + "', tags) "
+                    + "OR FIND_IN_SET(' " + this.value + " ', tags)";
             ResultSet rs = stm.executeQuery(sql);
 
             while(rs.next()) {
                 anyImage = true;
-                imgListBean image = new imgListBean(rs.getInt(1), rs.getString(8), rs.getString(2));
+                imgListBean image = new imgListBean(rs.getInt(1), rs.getString(8), rs.getString(2), rs.getString(9));
                 imageList.add(image);
             }
             
