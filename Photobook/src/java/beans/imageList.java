@@ -23,9 +23,7 @@ public class imageList {
         String url = "jdbc:mysql://localhost:3306/photobook";
 
         Class.forName(sterownik);
-        System.out.println("sterownik OK");
         Connection conn = DriverManager.getConnection(url, "root", "");         // db link, user, password
-        System.out.println("baza OK");
         
         Statement stm = conn.createStatement();                                 //uwaga na import - ma być z pakietu java.sql
         String sql = "SELECT i.*, u.nickname FROM image i INNER JOIN user u ON u.id = i.author_id ORDER BY date_added DESC LIMIT 15";

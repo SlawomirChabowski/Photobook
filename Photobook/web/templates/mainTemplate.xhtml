@@ -74,7 +74,7 @@
                             </p>
 
                             <ul id="profile_navigation" class="logged_in_message">
-                                <li><a href="#">#{msg.sidebar_addNew}</a></li>
+                                <li><h:link value="#{msg.sidebar_addNew}" outcome="addImage"></h:link></li>
                                 <li><h:link value="#{msg.sidebar_goToSettings}" outcome="editProfile"></h:link></li>
                             </ul>
 
@@ -98,8 +98,7 @@
                 </div>
             </h:form>
             <!-- End when not logged in -->
-
-            <hr />
+            <br />
 
             <h:form class="input-group input-group-sm mb-3">
                 <h:inputText class="form-control" a:placeholder="#{msg.sidebar_searchPlaceholder}" value="#{searchQuery}" autocomplete="false"/>
@@ -107,12 +106,6 @@
                     <h:button class="btn btn-sm btn-primary" value="#{msg.sidebar_searchButton}" outcome="results?search=#{searchQuery}" />
                 </div>
             </h:form>
-            
-            <nav>
-                <ul id="left_bar_navigation">
-                    <li><h:button value="View image" outcome="viewImage" class="btn-space btn btn-sm btn-block btn-outline-info"></h:button></li>
-                </ul>
-            </nav>
 
             <hr />
 

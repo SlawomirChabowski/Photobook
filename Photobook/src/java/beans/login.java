@@ -63,9 +63,7 @@ public class login implements Serializable {
         String url = "jdbc:mysql://localhost:3306/photobook";
 
         Class.forName(sterownik);
-        System.out.println("sterownik OK");
         Connection conn = DriverManager.getConnection(url, "root", "");         // db link, user, password
-        System.out.println("baza OK");
         
         Statement stm = conn.createStatement();                                 //uwaga na import - ma być z pakietu java.sql
         String sql = "SELECT * FROM user WHERE nickname = '" + userName + "' AND password = '" + userPassword + "'";

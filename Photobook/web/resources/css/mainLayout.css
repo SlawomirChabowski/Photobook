@@ -94,12 +94,6 @@ footer {
     text-align: center;
 }
 
-#left_bar_navigation {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
 li a {
     color: #ffffff;
     font-weight: 500;

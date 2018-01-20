@@ -51,7 +51,6 @@ public class profileSettings implements Serializable {
     
     // avatar data
     private Part uploadedFile;
-    private String folder;
     private String newAvatarName;
     
     
@@ -108,9 +107,7 @@ public class profileSettings implements Serializable {
         String url = "jdbc:mysql://localhost:3306/photobook";
 
         Class.forName(sterownik);
-        System.out.println("sterownik OK");
         Connection conn = DriverManager.getConnection(url, "root", "");         // db link, user, password
-        System.out.println("baza OK");
         
         Statement stm = conn.createStatement();
         String sql = "SELECT * FROM user WHERE id = " + login.userId;
@@ -140,9 +137,7 @@ public class profileSettings implements Serializable {
         String url = "jdbc:mysql://localhost:3306/photobook";
         
         Class.forName(sterownik);
-        System.out.println("sterownik OK");
         Connection conn = DriverManager.getConnection(url, "root", "");         // db link, user, password
-        System.out.println("baza OK");
         
         
         if(!this.oldPassword.equals(this.password)) {

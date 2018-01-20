@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./templates/mainTemplate.xhtml">
+
+            <ui:define name="content">
+                <!-- If title is null -->
+                <h:panelGroup rendered="#{addImage.titleNull}" id="badTitle" layout="block" class="alert alert-danger"
+                              style="z-index: 999;
+                              bottom: 0;
+                              position: fixed;
+                              left: 50%;
+                              transform: translate(-50%, 0);
+                              padding-left: 100px;
+                              padding-right: 100px;
+                              font-size: 24px;">
+                    #{msg.addImage_badTitle}
+                    <script type="text/javascript">
+                        var elem = document.getElementById("badTitle");
+                        setTimeout(function () {
+                            elem.style.animation = 'fadeout 1.0s';
+                            setTimeout(function () {
+                                elem.style.display = 'none'
+                            }, 1000)}, 5000);
+                    </script>
+                    <h:form>
+                        <p:remoteCommand autoRun="true" actionListener="#{addImage.setTitleNull(false)}" />
+                    </h:form>
+                </h:panelGroup>
+                
+                <!-- If title is null -->
+                <h:panelGroup rendered="#{addImage.incorrectImageType}" id="badImage" layout="block" class="alert alert-danger"
+                              style="z-index: 999;
+                              bottom: 0;
+                              position: fixed;
+                              left: 50%;
+                              transform: translate(-50%, 0);
+                              padding-left: 100px;
+                              padding-right: 100px;
+                              font-size: 24px;">
+                    #{msg.addImage_badImg}
+                    <script type="text/javascript">
+                        var elem = document.getElementById("badImage");
+                        setTimeout(function () {
+                            elem.style.animation = 'fadeout 1.0s';
+                            setTimeout(function () {
+                                elem.style.display = 'none'
+                            }, 1000)}, 5000);
+                    </script>
+                    <h:form>
+                        <p:remoteCommand autoRun="true" actionListener="#{addImage.setIncorrectImageType(false)}" />
+                    </h:form>
+                </h:panelGroup>
+                
+                
+                <h:form enctype="multipart/form-data">
+                    <h3 class="display-4">#{msg.addImage_title}</h3>
+                    <hr />
+                    
+                    <div class="form-group row">
+                        <h:outputLabel for="chooseImg" value="#{msg.addImage_choose}:" class="col-sm-2 col-form-label" />
+                        <div class="col-sm-10">
+                            <h:inputFile value="#{addImage.uploadedFile}" id="chooseImg" class="form-control-file" />
+                        </div>
+                        <small class="muted">#{msg.editProfile_avatarTypes}</small>
+                    </div>
+
+                    <div class="form-group row">
+                        <h:outputLabel for="insertTitle" value="#{msg.addImage_addtitle}:" class="col-sm-2 col-form-label" />
+                        <div class="col-sm-10">
+                            <h:inputText value="#{addImage.title}" id="insertTitle" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <h:outputLabel for="selectCategory" value="#{msg.addImage_category}:" class="col-sm-2 col-form-label" />
+                        <div class="col-sm-10">
+                            <h:selectOneMenu value="#{addImage.category}" id="selectCategory" class="custom-select form-control">
+                                <f:selectItems value="#{addImage.categoryList}" var="item" itemValue="#{item.id}" itemLabel="#{item.name}" />
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <h:outputLabel for="insertDesc" value="#{msg.addImage_description}:" class="col-sm-2 col-form-label" />
+                        <div class="col-sm-10">
+                            <h:inputText value="#{addImage.description}" id="insertDesc" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <h:outputLabel for="insertTags" value="#{msg.addImage_tags}:" class="col-sm-2 col-form-label" />
+                        <div class="col-sm-10">
+                            <h:inputText value="#{addImage.tags}" id="insertTags" class="form-control" />
+                        </div>
+                        <small class="muted">#{msg.addImage_tagsDetails}</small>
+                        </div>
+                    
+                    <p class="text-info">#{msg.addImage_optional}</p>
+                    <hr />
+                    
+                    <h:commandButton class="btn btn-primary" value="#{msg.addImage_addButton}" action="#{addImage.newImage()}" />
+                    
+                </h:form>
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>

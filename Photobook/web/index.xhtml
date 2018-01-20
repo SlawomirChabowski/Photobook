@@ -13,7 +13,7 @@
             <ui:define name="content">
 
                 <!-- If new account created -->
-                <h:panelGroup rendered="#{register.created}" id="registerMessage" layout="block" class="alert alert-danger"
+                <h:panelGroup rendered="#{register.created}" id="registerMessage" layout="block" class="alert alert-success"
                               style="z-index: 999;
                               bottom: 0;
                               position: fixed;
@@ -54,7 +54,7 @@
                     <div style="width: 100%; text-align: center;">
 
                             
-                        <c:forEach items="${imageList.imageList}" var="element" >
+                        <c:forEach items="${imageList.imageList}" var="element">
                             
                             <figure class="figurefx pushup img-thumbnail thumbnail_container">
                                 <h:graphicImage class="thumbnail-image thumbnail_image" library="user-images" name="#{element.img}" />	
