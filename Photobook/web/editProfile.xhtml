@@ -112,7 +112,32 @@
                     </h:form>
                 </h:panelGroup>
                 
-                <h:form>
+                <!-- Shown only if image type is wrong -->
+                <h:panelGroup rendered="#{profileSettings.incorrectImageType}" id="incorrectImageType" layout="block" class="alert alert-danger"
+                              style="z-index: 999;
+                              bottom: 0;
+                              position: fixed;
+                              left: 50%;
+                              transform: translate(-50%, 0);
+                              padding-left: 100px;
+                              padding-right: 100px;
+                              font-size: 24px;">
+                    #{msg.editProfile_badAvatar}
+                    <script type="text/javascript">
+                        var elem = document.getElementById("incorrectImageType");
+                        setTimeout(function () {
+                            elem.style.animation = 'fadeout 1.0s';
+                            setTimeout(function () {
+                                elem.style.display = 'none'
+                            }, 1000)}, 5000);
+                    </script>
+                    <!-- Setting register.created to false -->
+                    <h:form>
+                        <p:remoteCommand autoRun="true" actionListener="#{profileSettings.setIncorrectImageType(false)}" />
+                    </h:form>
+                </h:panelGroup>
+                
+                <h:form enctype="multipart/form-data">
                     
                     <div class="row">
                         <div class="col-9">
@@ -120,7 +145,6 @@
                             <hr />
                             <br />
                             
-                            <h:form>
 
                                 <h4>#{msg.editProfile_basicInfo}</h4>
                                 <div class="form-group">
@@ -140,8 +164,6 @@
                                 
                                 <hr />
                                 <h4>#{msg.editProfile_additionalInfo}</h4>
-                                
-                                <div class="form-group">Change avatar</div>
                                 
                                 <div class="form-group">
                                     
@@ -173,28 +195,22 @@
                                 
                                 <h:commandButton class="btn btn-primary" value="#{msg.editProfile_saveChangesButton}" action="#{profileSettings.setChanges()}" />
 
-                            </h:form>
                             
                         </div>
                         
                         <!-- Show current user avatar -->
-                        <div class="col-3">
-                            <img src="#{profileSettings.avatar}" class="rounded-circle img-thumbnail"/>
+                        <div class="col-3 form-group">
+                            <img src="#{profileSettings.avatar}" style="width: 250px; height: 250px;" class="rounded-circle img-thumbnail"/>
 
-                            <!--
-                            <h:form enctype="multipart/form-data">
-                                <p:fileUpload value="hasztag{profileSettings.avatarFile}" mode="simple"
-                                          allowTypes="/(\.|\/)(gif|jpg|jpeg|png)$/"/>
-                                <h:commandButton class="btn btn-primary pull-right" value="Zmień avatar" action="funkcja zmiany avatara" />
-
-                            </h:form>
-                            -->
+                            
+                            <h4>#{msg.editProfile_changeAvatar}</h4>
+                            <small class="muted">#{msg.editProfile_avatarTypes}</small>
+                            <h:inputFile value="#{profileSettings.uploadedFile}"  />
                         </div>
                         
                     </div>
                     
                 </h:form>
-                
             </ui:define>
 
         </ui:composition>

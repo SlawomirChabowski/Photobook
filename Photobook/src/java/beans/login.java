@@ -13,9 +13,9 @@ import javax.enterprise.context.SessionScoped;
 @SessionScoped
 public class login implements Serializable {
     
-    private String userName;
+    public static String userName;
     private String userPassword;
-    private String avatarUrl = "images/avatar-placeholder.png";
+    public static String avatarUrl = "resources/images/avatar-placeholder.png";
     private boolean logged = false;
     private boolean badData = false;
     public static int userId = 0;
@@ -75,16 +75,17 @@ public class login implements Serializable {
             logged = true;
             badData = false;
             if(!(rs.getString(11) == null))
-                avatarUrl = "user-avatars/" + rs.getString(11);
+                avatarUrl = "resources/user-avatars/" + rs.getString(11);
             else
-                avatarUrl = "images/avatar-placeholder.png";
+                avatarUrl = "resources/images/avatar-placeholder.png";
             userId = rs.getInt(1);
+            userName = rs.getString(2);
             conn.close();
             return "index";
         }
         
         badData = true;
-        avatarUrl = "images/avatar-placeholder.png";
+        avatarUrl = "resources/images/avatar-placeholder.png";
         userId = 0;
         conn.close();
         return "login";

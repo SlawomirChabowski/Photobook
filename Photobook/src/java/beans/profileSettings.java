@@ -1,5 +1,9 @@
 package beans;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import javax.inject.Named;
 import javax.enterprise.context.ConversationScoped;
 import java.io.Serializable;
@@ -9,16 +13,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.Part;
 
 @Named(value = "profileSettings")
 @ConversationScoped
 public class profileSettings implements Serializable {
     
     // controlling the alerts
-    private boolean invalidPassword = false;
-    private boolean passwordsDiffer = false;
-    private boolean badEmail        = false;
-    private boolean success         = false;
+    private boolean invalidPassword     = false;
+    private boolean passwordsDiffer     = false;
+    private boolean badEmail            = false;
+    private boolean success             = false;
+    private boolean incorrectImageType  = false;
 
     // data from database
     private String nickname;
@@ -41,6 +48,11 @@ public class profileSettings implements Serializable {
     private String newAbout;
     private String newAvatarPath;
     private String oldPassword;
+    
+    // avatar data
+    private Part uploadedFile;
+    private String folder;
+    private String newAvatarName;
     
     
     // getters and setters
@@ -74,17 +86,23 @@ public class profileSettings implements Serializable {
     public String getNewAvatarPath()            { return newAvatarPath; }
     public String getOldPassword()              { return oldPassword; }
     
-    public boolean isInvalidPassword()                      { return invalidPassword; }
-    public void setInvalidPassword(boolean invalidPassword) { this.invalidPassword = invalidPassword; }
-    public boolean isPasswordsDiffer()                      { return passwordsDiffer; }
-    public void setPasswordsDiffer(boolean passwordsDiffer) { this.passwordsDiffer = passwordsDiffer; }
-    public boolean isSuccess()                              { return success; }
-    public void setSuccess(boolean success)                 { this.success = success; }
-    public boolean isBadEmail()                             { return badEmail; }
-    public void setBadEmail(boolean badEmail)               { this.badEmail = badEmail; }
+    public boolean isInvalidPassword()                              { return invalidPassword; }
+    public void setInvalidPassword(boolean invalidPassword)         { this.invalidPassword = invalidPassword; }
+    public boolean isPasswordsDiffer()                              { return passwordsDiffer; }
+    public void setPasswordsDiffer(boolean passwordsDiffer)         { this.passwordsDiffer = passwordsDiffer; }
+    public boolean isSuccess()                                      { return success; }
+    public void setSuccess(boolean success)                         { this.success = success; }
+    public boolean isBadEmail()                                     { return badEmail; }
+    public void setBadEmail(boolean badEmail)                       { this.badEmail = badEmail; }
+    public boolean isIncorrectImageType()                           { return incorrectImageType; }
+    public void setIncorrectImageType(boolean incorrectImageType)   { this.incorrectImageType = incorrectImageType; }
+    
+    public Part getUploadedFile()                   { return uploadedFile; }
+    public void setUploadedFile(Part uploadedFile)  { this.uploadedFile = uploadedFile; }
+    
     
     // constructor
-    public profileSettings() throws ClassNotFoundException, SQLException {
+    public profileSettings() throws ClassNotFoundException, SQLException, IOException {
         
         String sterownik = "com.mysql.jdbc.Driver";
         String url = "jdbc:mysql://localhost:3306/photobook";
@@ -105,7 +123,7 @@ public class profileSettings implements Serializable {
             this.email      = rs.getString(5);
             this.password   = rs.getString(6);
             this.website    = rs.getString(9);
-            this.newAbout   = rs.getString(10);
+            this.about      = rs.getString(10);
             
             if(rs.getString(11) == null || rs.getString(11).trim().isEmpty())
                 this.avatar = "resources/images/avatar-placeholder.png";
@@ -116,7 +134,7 @@ public class profileSettings implements Serializable {
     
     
     // method to change profile data
-    public String setChanges() throws ClassNotFoundException, SQLException {
+    public String setChanges() throws ClassNotFoundException, SQLException, IOException {
         
         String sterownik = "com.mysql.jdbc.Driver";
         String url = "jdbc:mysql://localhost:3306/photobook";
@@ -151,7 +169,6 @@ public class profileSettings implements Serializable {
         
         if(!(this.newPassword == null || this.newPassword.trim().isEmpty())) {
             if(this.newPassword.length() < 5 || !this.newPassword.equals(this.newPasswordConfirmation)) {
-                System.out.println("\"" + this.newPassword + "\"");
                 passwordsDiffer = true;
                 conn.close();
                 return "editProfile";
@@ -161,6 +178,47 @@ public class profileSettings implements Serializable {
                 statement.setString(1, this.newPassword);
                 statement.execute();
             }
+        }
+        
+        
+        // update avatar
+        try {
+            InputStream input = uploadedFile.getInputStream();
+            // check if extension is .png, .jpg, .jpeg or .gif
+            String folder = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/") + "/resources/user-avatars/";
+            String extension = uploadedFile.getSubmittedFileName().substring(uploadedFile.getSubmittedFileName().lastIndexOf(".")+1);
+            if(extension.equals("png") || extension.equals("jpg") || extension.equals("jpeg") || extension.equals("gif")) {
+                // set file name
+                newAvatarName = "av_" + login.userName + "_" + System.currentTimeMillis() + "." + extension;
+                newAvatarPath = folder + newAvatarName;
+                
+                File f = new File(newAvatarPath);
+                if(!f.exists()) {
+                    f.createNewFile();
+                }
+                FileOutputStream output = new FileOutputStream(f);
+                byte[] buffer = new byte[1024];
+                int length;
+                while((length = input.read(buffer)) > 0) {
+                        output.write(buffer, 0, length);
+                }
+                input.close();
+                output.close();
+                
+                // update user table
+                PreparedStatement tempstm = conn.prepareStatement("UPDATE user SET avatar_img_name=? WHERE id=" + login.userId);
+                tempstm.setString(1, this.newAvatarName);
+                tempstm.execute();
+                login.avatarUrl = "resources/user-avatars/" + this.newAvatarName;
+                this.avatar = "resources/user-avatars/" + this.newAvatarName;
+            } else {
+                incorrectImageType = true;
+                input.close();
+                conn.close();
+                return "editProfile";
+            }
+        } catch(Exception e) {
+            e.printStackTrace(System.out);
         }
         
         
@@ -177,30 +235,9 @@ public class profileSettings implements Serializable {
         statement.setString(4, this.newAbout);
         statement.execute();
         
+
         success = true;
         conn.close();
         return "editProfile";
     }
-    
-    
-    
-    /*
-    // upload an avatar
-    private UploadedFile avatarFile;
- 
-    public UploadedFile getAvatarFile() {
-        return avatarFile;
-    }
- 
-    public void setAvatarFile(UploadedFile avatarFile) {
-        this.avatarFile = avatarFile;
-    }
-     
-    public void upload() {
-        if(avatarFile != null) {
-            avatarFile.setName(this.nickname + "_avatar" + avatarFile.());
-            FacesMessage message = new FacesMessage("Succesful, your avatar has been updated.");
-            FacesContext.getCurrentInstance().addMessage(null, message);
-        }
-    }*/
 }
