@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <body>
 
@@ -14,38 +15,43 @@
                     <figure class="figure">
                         
                         <div class="row">
-                            <h1 class=" col-6 display-5">Tytuł zdjęcia</h1>
+                            <h1 class=" col-6 display-5">#{viewImage.title}</h1>
                             <div class="col-6">
-                                <figcaption class="figure-caption text-right">Autor zdjęcia: <a href="#">User</a></figcaption>
-                                <figcaption class="figure-caption text-right">Data dodania: 01/01/2017</figcaption>
+                                <figcaption class="figure-caption text-right">#{msg.viewImage_author}:
+                                    <h:link value="#{viewImage.author}" outcome="viewProfile?user=#{viewImage.author}" />
+                                </figcaption>
+                                <figcaption class="figure-caption text-right">#{msg.viewImage_date}: #{viewImage.dateAdded}</figcaption>
                             </div>
                         </div>
-                        <img src="./resources/user-images/img_01.jpg" class="figure-img img-fluid rounded" alt="A generic square placeholder image with rounded corners in a figure." />
-                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
-                            totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
-                            dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit,
-                            sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro
-                            quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non
-                            numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut
-                            enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut
-                            aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate
-                            velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
+                        <h:graphicImage value="#{viewImage.image}" class="figure-img img-fluid rounded" />
+                        <figcaption>
+                            <strong>#{msg.viewImage_tagList}</strong>: 
+                            <c:forEach items="${viewImage.tags}" var="element">
+                                <h:link value="#{element}" outcome="tags?value=#{element}" />&#160;
+                            </c:forEach>
+                        </figcaption>
+                        <figcaption>
+                            <strong>#{msg.viewImage_category}</strong>: <h:link value="#{viewImage.category}" outcome="categories?value=#{viewImage.category}" />
+                        </figcaption>
+                        <figcaption>
+                            <p><strong>#{msg.viewImage_desc}</strong>: #{viewImage.description}</p>
+                        </figcaption>
                         
                     </figure>
                     
                     <hr />
                     
-                    <h3>Komentarze:</h3>
-                    <!-- Napisz komentarz -->
+                    <h3>#{msg.viewImage_commentsTitle}:</h3>
+                    <!-- Write a comment -->
                     <form id="add_new_comment">
-                        <textarea class="input_comment" placeholder="Napisz komentarz..." />
-                        <button class="btn btn-success">Wyślij</button>
+                        <textarea class="input_comment form-control" placeholder="#{msg.viewImage_writeComment}" />
+                        <button class="btn btn-success">#{msg.viewImage_sendComment}</button>
                     </form>
-                    <!-- Brak komentarzy -->
+                    <!-- No comments -->
                     <div class="no_comments_box_outer" style="margin-bottom: 15px;">
-                        <div class="no_comments_box_inner">Brak komentarzy</div>
+                        <div class="no_comments_box_inner">#{msg.viewImage_noComments}</div>
                     </div>
-                    <!-- Komentarze -->
+                    <!-- Comments -->
                     
                 </div>
             </ui:define>

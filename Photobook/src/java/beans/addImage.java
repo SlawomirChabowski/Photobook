@@ -91,53 +91,58 @@ public class addImage implements Serializable {
         }
         else {
             try {
-                InputStream input = uploadedFile.getInputStream();
-                // check if extension is .png, .jpg, .jpeg or .gif
-                String folder = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/") + "/resources/user-images/";
-                String extension = uploadedFile.getSubmittedFileName().substring(uploadedFile.getSubmittedFileName().lastIndexOf(".")+1);
-                if(extension.equals("png") || extension.equals("jpg") || extension.equals("jpeg") || extension.equals("gif")) {
-                    // set file name
-                    imgName = "av_" + login.userName + "_" + System.currentTimeMillis() + "." + extension;
-                    imgPath = folder + imgName;
-
-                    File f = new File(imgPath);
-                    if(!f.exists()) {
-                        f.createNewFile();
-                    }
-                    FileOutputStream output = new FileOutputStream(f);
-                    byte[] buffer = new byte[1024];
-                    int length;
-                    while((length = input.read(buffer)) > 0) {
-                            output.write(buffer, 0, length);
-                    }
-                    input.close();
-                    output.close();
-                    
-                    // insert new image
-                    String sterownik = "com.mysql.jdbc.Driver";
-                    String url = "jdbc:mysql://localhost:3306/photobook";
-
-                    Class.forName(sterownik);
-                    Connection conn = DriverManager.getConnection(url, "root", "");         // db link, user, password
-                    
-                    String sql = "INSERT INTO image(title, description, tags, category_id, author_id, img_file_name) "
-                            + "VALUES(?, ?, ?, ?, ?, ?)";
-                    
-                    PreparedStatement statement = conn.prepareStatement(sql);
-                    statement.setString(1, this.title);
-                    statement.setString(2, this.description);
-                    statement.setString(3, this.tags);
-                    statement.setInt(4, this.category);
-                    statement.setInt(5, login.userId);
-                    statement.setString(6, this.imgName);
-                    statement.execute();
-                    
-                    id = statement.getGeneratedKeys().getLong(1);
-                    conn.close();
-                } else {
-                    incorrectImageType = true;
-                    input.close();
+                if(this.title == null || this.title.trim().equals("")) {
+                    titleNull = true;
                     return "addImage";
+                } else {
+                    InputStream input = uploadedFile.getInputStream();
+                    // check if extension is .png, .jpg, .jpeg or .gif
+                    String folder = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/") + "/resources/user-images/";
+                    String extension = uploadedFile.getSubmittedFileName().substring(uploadedFile.getSubmittedFileName().lastIndexOf(".")+1);
+                    if(extension.equals("png") || extension.equals("jpg") || extension.equals("jpeg") || extension.equals("gif")) {
+                        // set file name
+                        imgName = "av_" + login.userName + "_" + System.currentTimeMillis() + "." + extension;
+                        imgPath = folder + imgName;
+
+                        File f = new File(imgPath);
+                        if(!f.exists()) {
+                            f.createNewFile();
+                        }
+                        FileOutputStream output = new FileOutputStream(f);
+                        byte[] buffer = new byte[1024];
+                        int length;
+                        while((length = input.read(buffer)) > 0) {
+                                output.write(buffer, 0, length);
+                        }
+                        input.close();
+                        output.close();
+
+                        // insert new image
+                        String sterownik = "com.mysql.jdbc.Driver";
+                        String url = "jdbc:mysql://localhost:3306/photobook";
+
+                        Class.forName(sterownik);
+                        Connection conn = DriverManager.getConnection(url, "root", "");         // db link, user, password
+
+                        String sql = "INSERT INTO image(title, description, tags, category_id, author_id, img_file_name) "
+                                + "VALUES(?, ?, ?, ?, ?, ?)";
+
+                        PreparedStatement statement = conn.prepareStatement(sql);
+                        statement.setString(1, this.title);
+                        statement.setString(2, this.description);
+                        statement.setString(3, this.tags);
+                        statement.setInt(4, this.category);
+                        statement.setInt(5, login.userId);
+                        statement.setString(6, this.imgName);
+                        statement.execute();
+
+                        id = statement.getGeneratedKeys().getLong(1);
+                        conn.close();
+                    } else {
+                        incorrectImageType = true;
+                        input.close();
+                        return "addImage";
+                    }
                 }
             } catch(Exception e) {
                 e.printStackTrace(System.out);

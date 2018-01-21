@@ -26,7 +26,7 @@ public class imageList {
         Connection conn = DriverManager.getConnection(url, "root", "");         // db link, user, password
         
         Statement stm = conn.createStatement();                                 //uwaga na import - ma być z pakietu java.sql
-        String sql = "SELECT i.*, u.nickname FROM image i INNER JOIN user u ON u.id = i.author_id ORDER BY date_added DESC LIMIT 15";
+        String sql = "SELECT i.*, u.nickname FROM image i INNER JOIN user u ON u.id = i.author_id ORDER BY date_added DESC LIMIT 9";
         ResultSet rs = stm.executeQuery(sql);
         
         while(rs.next()){

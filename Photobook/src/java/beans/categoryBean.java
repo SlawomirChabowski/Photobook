@@ -1,0 +1,54 @@
+package beans;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import javax.inject.Named;
+import javax.enterprise.context.Dependent;
+import javax.faces.context.FacesContext;
+
+@Named(value = "categoryBean")
+@Dependent
+public class categoryBean {
+
+    Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+    private String value = params.get("value");
+    public String getValue() { return value; }
+    
+    private boolean anyImage;
+    public boolean isAnyImage()     { return anyImage; }
+    
+    private List<imgListBean> imageList = new ArrayList<imgListBean>();
+    public List<imgListBean> getImageList() { return imageList; }
+    
+    public categoryBean() throws ClassNotFoundException, SQLException {
+        if(this.value != null && !this.value.trim().equals("")) {
+            String sterownik = "com.mysql.jdbc.Driver";
+            String url = "jdbc:mysql://localhost:3306/photobook";
+
+            Class.forName(sterownik);
+            Connection conn = DriverManager.getConnection(url, "root", "");         // db link, user, password
+
+            Statement stm = conn.createStatement();                                 //uwaga na import - ma być z pakietu java.sql
+            String sql = "SELECT i.*, u.nickname FROM image i "
+                    + "INNER JOIN user u ON i.author_id=u.id "
+                    + "INNER JOIN categories c ON c.id=i.category_id "
+                    + "WHERE c.name='" + this.value + "'";
+            ResultSet rs = stm.executeQuery(sql);
+
+            while(rs.next()) {
+                anyImage = true;
+                imgListBean image = new imgListBean(rs.getInt(1), rs.getString(8), rs.getString(2), rs.getString(9));
+                imageList.add(image);
+            }
+            
+            conn.close();
+        }
+    }
+    
+}

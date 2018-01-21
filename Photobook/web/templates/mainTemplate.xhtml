@@ -4,7 +4,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     
     <!-- Localisation -->
     <f:loadBundle basename="locales.locale" var="msg" />
@@ -106,6 +107,18 @@
                     <h:button class="btn btn-sm btn-primary" value="#{msg.sidebar_searchButton}" outcome="results?search=#{searchQuery}" />
                 </div>
             </h:form>
+            
+            <hr />
+            <nav>
+                <h6 style="text-align: center;">#{msg.sidebar_browseCats}:</h6>
+                <ul class="nav fles-column">
+                    <c:forEach items="${browseCats.categories}" var="element">
+                        <li class="nav-item" style="width:100%;">
+                            <h:link value="#{element}" outcome="categories?value=#{element}" class="btn btn-outline-info" style="width: 100%; margin-top: 3px;"/>
+                        </li>
+                    </c:forEach>
+                </ul>
+            </nav>
 
             <hr />
 

@@ -74,7 +74,7 @@ public class profileViewBean {
                 this.avatar = "resources/user-avatars/" + rs.getString(11);
         }
         
-        sql = "SELECT * FROM image WHERE author_id=" + this.id;
+        sql = "SELECT * FROM image WHERE author_id=" + this.id + " ORDER BY date_added DESC";
         rs = stm.executeQuery(sql);
 
         while(rs.next()) {

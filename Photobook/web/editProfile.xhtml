@@ -7,9 +7,7 @@
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
     <body>
-
         <ui:composition template="./templates/mainTemplate.xhtml">
-
             <ui:define name="content">
                 
                 <!-- Shown only if settings saved -->
@@ -181,7 +179,7 @@
                                     <h:inputText class="form-control" a:value="#{profileSettings.website}" value="#{profileSettings.newWebsite}" />
                                     
                                     <h:outputText value="#{msg.editProfile_about}:&nbsp;" />
-                                    <h:inputTextarea class="form-control" value="#{profileSettings.newAbout}"/>
+                                    <h:inputTextarea rows="10" class="form-control" value="#{profileSettings.newAbout}"/>
                                     
                                 </div>
                                     
@@ -212,8 +210,6 @@
                     
                 </h:form>
             </ui:define>
-
         </ui:composition>
-
     </body>
 </html>
