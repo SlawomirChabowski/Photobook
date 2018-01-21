@@ -25,6 +25,9 @@ public class viewImage {
     private boolean commentAdded = false;
     public boolean getCommentAdded() { return commentAdded; }
     public void setCommentAdded(boolean commentAdded) { this.commentAdded = commentAdded; }
+    private boolean noComments = true;
+    public boolean getNoComments() { return noComments; }
+    public void setNoComments(boolean noComments) { this.noComments = noComments; }
     
     private String image;
     private String title;
@@ -33,14 +36,16 @@ public class viewImage {
     private List<String> tags = new ArrayList<>();
     private String description;
     private String category;
+    private List<CommentClass> commentList = new ArrayList<>();
     
-    public String getImage()        { return image; }
-    public String getTitle()        { return title; }
-    public String getAuthor()       { return author; }
-    public String getDateAdded()    { return dateAdded; }
-    public List<String> getTags()   { return tags; }
-    public String getDescription()  { return description; }
-    public String getCategory()     { return category; }
+    public String getImage()                    { return image; }
+    public String getTitle()                    { return title; }
+    public String getAuthor()                   { return author; }
+    public String getDateAdded()                { return dateAdded; }
+    public List<String> getTags()               { return tags; }
+    public String getDescription()              { return description; }
+    public String getCategory()                 { return category; }
+    public List<CommentClass> getCommentList()  { return commentList; }
     
     
     public viewImage() {
@@ -67,6 +72,18 @@ public class viewImage {
                 this.author = rs.getString(9);
                 this.image = "resources/user-images/" + rs.getString(8);
             }
+            
+            sql = "SELECT u.nickname, c.comment_text, c.date_added FROM comment c "
+                    + "INNER JOIN user u ON u.id=c.author_id "
+                    + "WHERE image_id=" + this.imgId;
+            ResultSet rs2 = stm.executeQuery(sql);
+            
+            while(rs2.next()) {
+                noComments = false;
+                this.commentList.add(new CommentClass(rs2.getString(3), rs2.getString(1), rs2.getString(2)));
+            }
+            
+            conn.close();
         } catch (Exception ex) {
             imgNotFound = true;
         }

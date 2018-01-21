@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
 
@@ -43,15 +44,36 @@
                     
                     <h3>#{msg.viewImage_commentsTitle}:</h3>
                     <!-- Write a comment -->
-                    <form id="add_new_comment">
+                    <h:form>
                         <textarea class="input_comment form-control" placeholder="#{msg.viewImage_writeComment}" />
                         <button class="btn btn-success">#{msg.viewImage_sendComment}</button>
-                    </form>
-                    <!-- No comments -->
-                    <div class="no_comments_box_outer" style="margin-bottom: 15px;">
-                        <div class="no_comments_box_inner">#{msg.viewImage_noComments}</div>
-                    </div>
-                    <!-- Comments -->
+                    </h:form>
+                    
+                    <!-- If there are not any comments -->
+                    <!-- Shown only if settings saved -->
+                    <h:panelGroup rendered="#{viewImage.noComments}">
+                        <div class="no_comments_box_outer" style="margin-top: 15px;">
+                            <div class="no_comments_box_inner">#{msg.viewImage_noComments}</div>
+                        </div>
+                    </h:panelGroup>
+                    
+                    <!-- If there are comments -->
+                    <h:panelGroup rendered="#{not viewImage.noComments}">
+                        <hr />
+                        
+                        <c:forEach items="${viewImage.commentList}" var="element">
+                            <div class="card" style="width: 100%">
+                                <div class="card-body">
+                                    <h:link value="#{element.author}" outcome="viewProfile?user=#{element.author}" class="card-title"/>
+                                    <br />
+                                    <small class="text-muted text-sm">#{element.date}</small>
+                                    <p class="card-text">#{element.content}</p>
+                                </div>
+                            </div>
+                            <br />
+                        </c:forEach>
+                        
+                    </h:panelGroup>
                     
                 </div>
             </ui:define>
