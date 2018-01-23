@@ -40,6 +40,12 @@
                         
                     </figure>
                     
+                    <h:panelGroup rendered="#{viewImage.imgOwner}">
+                        <h:button class="btn btn-lg btn-light" style="width: 100%;"
+                            value="#{msg.viewImage_editImage}"
+                            outcome="editImage?img=#{viewImage.imgId}" />
+                    </h:panelGroup>
+                    
                     <hr />
                     
                     <h3>#{msg.viewImage_commentsTitle}:</h3>

@@ -138,7 +138,7 @@ public class addImage implements Serializable {
 
                     while(rs.next()) {
                         id = rs.getInt(1);
-                    }System.out.println(id);
+                    }
 
                     conn.close();
                 } 

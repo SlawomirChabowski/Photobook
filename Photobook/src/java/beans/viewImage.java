@@ -18,6 +18,7 @@ public class viewImage {
     
     Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
     private String imgId = params.get("img");
+    public String getImgId() { return this.imgId; }
     
     private boolean imgNotFound = false;
     public boolean getImgNotFound() { return imgNotFound; }
@@ -28,6 +29,8 @@ public class viewImage {
     private boolean noComments = true;
     public boolean getNoComments() { return noComments; }
     public void setNoComments(boolean noComments) { this.noComments = noComments; }
+    private boolean imgOwner = false;
+    public boolean isImgOwner() { return imgOwner; }
     
     private String image;
     private String title;
@@ -71,6 +74,7 @@ public class viewImage {
                 this.category = rs.getString(10);
                 this.author = rs.getString(9);
                 this.image = "resources/user-images/" + rs.getString(8);
+                if(rs.getInt(7) == login.userId) imgOwner = true;
             }
             
             sql = "SELECT u.nickname, c.comment_text, c.date_added FROM comment c "

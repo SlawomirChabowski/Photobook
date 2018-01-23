@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+    <body>
+
+        <ui:composition template="./templates/mainTemplate.xhtml">
+
+            <ui:define name="content">
+                
+                <!-- If logged in user is okay -->
+                <h:panelGroup rendered="#{editImage.properUser}">
+                    <h:form>
+                        <h3 class="display-4">#{msg.editImage_title}&#160;#{editImage.title}</h3>
+                        <hr />
+
+                        <div class="form-group row">
+                            <h:outputLabel for="insertTitle" value="#{msg.editImage_editTitle}:" class="col-sm-2 col-form-label" />
+                            <div class="col-sm-10">
+                                <h:inputText value="#{editImage.title}" id="insertTitle" class="form-control" a:value="#{editImage.oldTitle}" />
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <h:outputLabel for="selectCategory" value="#{msg.editImage_category}:" class="col-sm-2 col-form-label" />
+                            <div class="col-sm-10">
+                                <h:selectOneMenu value="#{editImage.category}" id="selectCategory" class="custom-select form-control" a:value="#{editImage.oldCategory}">
+                                    <f:selectItems value="#{editImage.categoryList}" var="item" itemValue="#{item.id}" itemLabel="#{item.name}" />
+                                </h:selectOneMenu>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <h:outputLabel for="insertDesc" value="#{msg.editImage_description}:" class="col-sm-2 col-form-label" />
+                            <div class="col-sm-10">
+                                <h:inputTextarea value="#{editImage.description}" id="insertDesc" class="form-control" rows="10" a:value="#{editImage.oldDescription}" />
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <h:outputLabel for="insertTags" value="#{msg.editImage_tags}:" class="col-sm-2 col-form-label" />
+                            <div class="col-sm-10">
+                                <h:inputText value="#{editImage.tags}" id="insertTags" class="form-control" a:value="#{editImage.oldTags}" />
+                            </div>
+                            <small class="muted">#{msg.editImage_tagsDetails}</small>
+                            </div>
+
+                        <p class="text-info">#{msg.editImage_optional}</p>
+                        <hr />
+
+                        <h:commandButton class="btn btn-success" value="#{msg.editImage_saveButton}" action="#{editImage.editImage()}" />
+                        &#160;
+                        <h:commandButton class="btn btn-danger" value="#{msg.editImage_delete}" action="#{editImage.deleteImage()}" />
+
+                    </h:form>
+                </h:panelGroup>
+                
+                
+                <h:panelGroup rendered="#{not editImage.properUser}"
+                        style="display: block; width: 100%; text-align: center;"
+                        class="alert alert-danger">
+                    <h4 class="alert-heading">#{msg.editImage_cannotEdit}</h4>
+                </h:panelGroup>
+                
+                <h:panelGroup rendered="#{not editImage.notFound}"
+                        style="display: block; width: 100%; text-align: center;"
+                        class="alert alert-warning">
+                    <h4 class="alert-heading">#{msg.editImage_imgNotFound}</h4>
+                </h:panelGroup>
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>
