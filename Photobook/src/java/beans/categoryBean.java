@@ -38,7 +38,8 @@ public class categoryBean {
             String sql = "SELECT i.*, u.nickname FROM image i "
                     + "INNER JOIN user u ON i.author_id=u.id "
                     + "INNER JOIN categories c ON c.id=i.category_id "
-                    + "WHERE c.name='" + this.value + "'";
+                    + "WHERE c.name='" + this.value + "' "
+                    + "ORDER BY date_added DESC";
             ResultSet rs = stm.executeQuery(sql);
 
             while(rs.next()) {
